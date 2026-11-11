@@ -35,16 +35,17 @@ Showtimes, seats and payment are simulated (see the README). Film artwork belong
 
 ## The signed release build, on a factory-reset emulator
 
-Version 1.0.1, release APK, on the emulator straight after a factory reset (Korean, the light display mode it ships
-with). The first launch, then the same flow.
+Version 1.1.0, the release APK built with no API keys in it (`-PnoKeys`), on the emulator after a factory reset
+(Korean, the light display mode it ships with). It opens in cached mode on the saved Seoul lineup.
 
 | | |
 |---|---|
-| ![](screenshots/release/02_first_run_location.jpg) 1. First launch: why Mo-Tix wants the car's position | ![](screenshots/release/03_system_permission_prompt.jpg) 2. Pleos asks for location access |
-| ![](screenshots/release/04_system_permission_prompt_fused.jpg) 3. Pleos asks for the fused position (its own permission) | ![](screenshots/release/06_lineup.jpg) 4. The first load, done |
-| ![](screenshots/release/08_trailer_parked.jpg) 5. Trailer, parked | ![](screenshots/release/10_theaters.jpg) 6. Theaters |
-| ![](screenshots/release/15_booked_qr.jpg) 7. Booked | ![](screenshots/release/16_route_native_navigation.jpg) 8. The Pleos navigation, guiding |
-| ![](screenshots/release/18_driving_static_ticket_card.jpg) 9. Driving (D, 40 km/h): the static ticket card | ![](screenshots/release/19_route_ended.jpg) 10. Route ended in the navigation: Mo-Tix offers it again |
+| ![](screenshots/release/06_lineup.jpg) 1. First launch, no keys: the saved lineup, with its date and the Saved / Live switch | ![](screenshots/release/20_live_needs_keys.jpg) 2. Live, on a build with no keys |
+| ![](screenshots/release/02_first_run_location.jpg) 3. Live on a build with keys: why Mo-Tix wants the car's position | ![](screenshots/release/03_system_permission_prompt.jpg) 4. Pleos asks for location access |
+| ![](screenshots/release/04_system_permission_prompt_fused.jpg) 5. Pleos asks for the fused position (its own permission) | ![](screenshots/release/21_live_listings_half_window.jpg) 6. Live listings, in the half window |
+| ![](screenshots/release/08_trailer_parked.jpg) 7. Trailer, parked | ![](screenshots/release/10_theaters.jpg) 8. Theaters |
+| ![](screenshots/release/15_booked_qr.jpg) 9. Booked | ![](screenshots/release/16_route_native_navigation.jpg) 10. The Pleos navigation, guiding |
+| ![](screenshots/release/18_driving_static_ticket_card.jpg) 11. Driving (D, 40 km/h): the static ticket card | ![](screenshots/release/19_route_ended.jpg) 12. Route ended in the navigation: Mo-Tix offers it again |
 
 ## The US market
 

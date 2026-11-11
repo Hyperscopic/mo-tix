@@ -47,6 +47,14 @@ Asta Sans (`app/src/main/res/font/asta_sans.ttf`), Copyright 2024 The Asta Sans 
 - AndroidX, Jetpack Compose and Material 3: Apache License 2.0, The Android Open Source Project.
 - Kotlin and kotlinx.coroutines: Apache License 2.0, JetBrains.
 
+## The saved listings (cached mode)
+
+`app/src/main/assets/snapshot/seoul.json` is a sample of the listings for Seongsu-dong, Seoul, as the sources above
+returned them on 2026-11-12: the film list (Google Search grounding), film details and image addresses (TMDB), trailer
+ids (YouTube) and theater names, addresses and coordinates (Google Places). It is bundled so the app can be tried
+without API keys, it is shown with its date, and it is not kept up to date. The images and trailers themselves are not
+in the repository: they are streamed from TMDB and YouTube when the app runs.
+
 ## Film artwork, titles and trailers
 
 Film posters, stills, titles and trailers are the property of their respective rights holders (studios and

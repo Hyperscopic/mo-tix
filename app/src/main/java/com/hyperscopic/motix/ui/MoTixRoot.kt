@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -66,11 +67,12 @@ fun MoTixRoot(vm: MoTixViewModel, locationGranted: Boolean, locationDenied: Bool
                     if (booking != null) TicketScreen(vm, booking, static = true) else DrivingNotice(vm)
                     return@CompositionLocalProvider
                 }
-                BackHandler(enabled = vm.stack.size > 1 || vm.creditsOpen) { vm.back() }
+                BackHandler(enabled = vm.stack.size > 1 || vm.creditsOpen || vm.liveNeedsKeys) { vm.back() }
                 val list = vm.filmList
                 val film = vm.film
                 when {
-                    !locationGranted -> LocationIntro(vm, locationDenied, onAskLocation)
+                    // Only live listings need the car position; the saved ones are placed where they were captured.
+                    !locationGranted && !vm.cachedMode -> LocationIntro(vm, locationDenied, onAskLocation)
                     list == null || film == null -> FirstLoad(vm)
                     else -> when (vm.screen) {
                         Screen.LINEUP -> LineupScreen(vm, list)
@@ -82,7 +84,22 @@ fun MoTixRoot(vm: MoTixViewModel, locationGranted: Boolean, locationDenied: Bool
                     }
                 }
                 if (vm.creditsOpen) CreditsPanel(vm)
+                if (vm.liveNeedsKeys) NoticePanel(stringResource(R.string.live_needs_keys)) { vm.liveNeedsKeys = false }
             }
+        }
+    }
+}
+
+/** A short message over the screen, with one way out. */
+@Composable
+private fun NoticePanel(text: String, onClose: () -> Unit) {
+    Box(Modifier.fillMaxSize().background(Color(0xCC000000)).tap(androidx.compose.ui.graphics.RectangleShape, onClick = onClose), contentAlignment = Alignment.Center) {
+        Column(
+            Modifier.fillMaxWidth(if (LocalCompact.current) 0.92f else 0.56f).glassCard(28.dp).tap(RoundedCornerShape(28.dp)) {}.padding(horizontal = 44.dp, vertical = 36.dp),
+        ) {
+            Text(text, style = Type.BodyL, color = MT.Text)
+            Spacer(Modifier.height(28.dp))
+            SecondaryButton(stringResource(R.string.close), Modifier.align(Alignment.End), onClick = onClose)
         }
     }
 }

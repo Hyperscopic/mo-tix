@@ -9,6 +9,10 @@
     <string name="whats_on_today">What\'s on today</string>
     <string name="films_near">%1$d films near %2$s</string>
     <string name="films_count">%1$d films in theaters now</string>
+    <string name="films_near_as_of">%1$d films near %2$s · as of %3$s</string>
+    <string name="mode_saved">Saved</string>
+    <string name="mode_live">Live</string>
+    <string name="live_needs_keys">Live listings need API keys, and this build has none. Add your own keys to local.properties and build again (see the README). Until then Mo-Tix shows the listings saved with the app.</string>
     <string name="watch_trailer">Watch trailer</string>
     <string name="see_it_nearby">See it nearby</string>
     <string name="next_nearby">Next nearby: %1$s at %2$s, %3$s</string>

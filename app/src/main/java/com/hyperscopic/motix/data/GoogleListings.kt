@@ -96,10 +96,10 @@ class GoogleListings(private val context: Context, private val keys: Keys) : Lis
             val film = check.obj("film")?.put("title", pin)?.toFilm(market) ?: continue
             films = films.toMutableList().apply { add(minOf(2, size), film) }
         }
-        val current = films.take(FILMS).withKnown().toMutableList()
-        onPartial(FilmList(market, current.toList(), credit, now))
-
-        // Artwork and trailers, a few films at a time; the list on screen fills in as each one lands.
+        // Every candidate (the answer has a couple more than are shown) is looked up, a few at a time; the list on
+        // screen fills in as each one lands.
+        val current = films.withKnown().toMutableList()
+        onPartial(FilmList(market, current.take(FILMS), credit, now))
         val gate = Semaphore(4)
         coroutineScope {
             current.indices.map { i ->
@@ -107,12 +107,16 @@ class GoogleListings(private val context: Context, private val keys: Keys) : Lis
                     gate.withPermit {
                         val done = runCatching { withArt(current[i], market) }.getOrElse { current[i] }
                         val snapshot = synchronized(current) { current[i] = done; current.toList() }
-                        onPartial(FilmList(market, snapshot, credit, now))
+                        onPartial(FilmList(market, snapshot.take(FILMS), credit, now))
                     }
                 }
             }.awaitAll()
         }
-        FilmList(market, synchronized(current) { current.toList() }, credit, now)
+        // A title TMDB does not know is most often one the search got wrong (a series, a film not out yet, a mistaken
+        // name), and it would show with no poster. When enough films are confirmed, only those are listed.
+        val all = synchronized(current) { current.toList() }
+        val confirmed = all.filter { it.tmdbId != null }
+        FilmList(market, (if (tmdbConfigured && confirmed.size >= MIN_CONFIRMED) confirmed else all).take(FILMS), credit, now)
     }
 
     private fun filmFields(market: Market): String = buildString {
@@ -477,6 +481,7 @@ class GoogleListings(private val context: Context, private val keys: Keys) : Lis
         private const val TAG = "MoTixListings"
         private const val MODEL = "gemini-2.5-flash"
         const val FILMS = 8
+        private const val MIN_CONFIRMED = 5
         private const val RETRY_MS = 6 * 3600_000L // a film with no artwork or trailer found is looked up again after this
         private val LONG_DATE = DateTimeFormatter.ofPattern("EEEE, MMMM dd, yyyy", Locale.US)
         private val SHORT_DATE = DateTimeFormatter.ofPattern("MMMM dd, yyyy", Locale.US)

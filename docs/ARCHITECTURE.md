@@ -116,6 +116,28 @@ search (the three Korean chains by name; a nearby search in the US), the TMDB la
    `movie_theater`, open, at least 200 ratings, the five nearest.
 5. **The neighbourhood name** in the header: the address components of the nearest place.
 
+The film search answers with a couple more films than are shown. Candidates TMDB cannot confirm are dropped when at
+least five films are confirmed: an unmatched title is most often one the search got wrong, and it would show with no
+poster.
+
+### Cached mode and the snapshot
+
+`cachedMode` (a stored setting, on by default) makes the view model take everything above from the bundled
+`assets/snapshot/seoul.json` instead: films with their artwork addresses and trailer ids, theaters, the place they are
+for and the date. No provider is called, no key and no location permission is needed, and the car is placed where the
+snapshot was captured. Showtimes, booking, the trailer player and the route work exactly as in live mode. The lineup
+shows the snapshot's date and a Saved / Live switch; Live needs keys in the build, and says so when there are none.
+
+To refresh the snapshot: run a **debug** build with keys in Live mode at the place you want (for example
+`adb emu geo fix 127.0557 37.5446`). When the load completes, the debug build writes the result in the snapshot format:
+
+```bash
+adb shell "run-as com.hyperscopic.motix --user 10 cat files/snapshot_export.json" > app/src/main/assets/snapshot/seoul.json
+```
+
+Then set `area.ko` and `area.en` in the file (the export only knows the name in the current language). The film
+search varies from run to run, so look the list over before committing it.
+
 ### The loading rule (`MoTixViewModel`)
 
 > Show the last good data at once, fetch behind it, and show a spinner only on a first load ever.
@@ -136,7 +158,8 @@ search (the three Korean chains by name; a nearby search in the US), the TMDB la
 | Theater names, addresses | never (memory only) | Places API terms |
 | Posters, stills, trailer thumbnails | `cache/img`, at most 7 days | TMDB and YouTube terms: no long-term copies |
 | The ticket | `files/ticket.json`, until the film has ended | so the ticket card survives a restart while driving |
-| API keys | compiled into the APK (`BuildConfig`) | see README: restrict them; production uses a hosted repository |
+| The bundled snapshot | `assets/snapshot/seoul.json`, in the APK and the repository | a dated sample so the app runs with no keys (cached mode) |
+| API keys | compiled into the APK (`BuildConfig`), or none with `-PnoKeys` | see README: restrict them; production uses a hosted repository |
 
 ## Ticketing (`data/Ticketing.kt`)
 

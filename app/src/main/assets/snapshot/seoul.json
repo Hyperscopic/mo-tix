@@ -1,0 +1,313 @@
+{
+ "note": "Sample listings bundled with Mo-Tix for cached mode: Seongsu-dong, Seoul, as captured from the live sources on the date in capturedAt. Refresh it from a debug build (docs/ARCHITECTURE.md).",
+ "market": "KR",
+ "lat": 37.5446,
+ "lon": 127.0557,
+ "area": {
+  "ko": "성수동",
+  "en": "Seongsu-dong"
+ },
+ "capturedAt": 1794436930972,
+ "films": [
+  {
+   "id": "gx-chiikawa-the-movie-the-secret-of-the-mermaid-island",
+   "title": "Chiikawa the Movie: The Secret of the Mermaid Island",
+   "titleKo": "영화 치이카와 인어의 섬의 비밀",
+   "year": 2026,
+   "genres": [
+    "Animation"
+   ],
+   "genresKo": [
+    "애니메이션"
+   ],
+   "runtime": 99,
+   "synopsis": "Chiikawa and friends set off on a whimsical summer adventure to a mysterious island said to hide a long-lost mermaid secret. What starts as a fun getaway quickly turns into a heartwarming journey filled with surprises, gentle thrills, and adorable chaos. With sparkling seas, strange legends, and unforgettable encounters, the trio learns about courage, friendship, and the magic hidden in small moments.",
+   "synopsisKo": "어느 날, 광장에서 쉬고 있던 치이카와와 가르마 앞에 얼굴에 전단지를 붙인 토끼가 나타난다. 그곳엔 “특별한 섬으로의 초대”라는 글귀가 적혀 있는데... “섬에서 간단한 토벌만 해도 보수 100배!” “한정 섬라멘과 한정 디저트까지, 달콤한 것도 매콤한 것도 사실상 무료.” 솔깃한 문구에 이끌린 치이카와와 친구들은 섬에서 열리는 행사에 참가하기로 한다. 초대장의 내용이 어딘가 수상하다고 느끼는 해달과, 부푼 마음으로 배에 오르는 치이카와와 친구들. 모두가 기대를 안은 채 특별한 섬에 도착하는데! 과연 그 섬에는 어떤 비밀이 숨겨져 있을까...?!",
+   "releaseDate": "2026-09-30",
+   "tmdbId": 1586876,
+   "poster": "https://image.tmdb.org/t/p/w780/5TMyytCI5Pfc9c1eNsljiCdiB05.jpg",
+   "still": "https://image.tmdb.org/t/p/w1280/rVOll8XOde5BuIF4tGO1q0pfngQ.jpg",
+   "artCheckedAt": 1794436938011,
+   "trailer": {
+    "id": "Z14psckpDBY",
+    "title": "[극장판 치이카와: 인어 섬의 비밀] 더빙 예고편",
+    "channel": "대원미디어DAEWON",
+    "thumb": "https://i.ytimg.com/vi/Z14psckpDBY/maxresdefault.jpg"
+   }
+  },
+  {
+   "id": "gx-final-interview",
+   "title": "Final Interview",
+   "titleKo": "최종면접",
+   "year": 2026,
+   "genres": [
+    "Mystery"
+   ],
+   "genresKo": [
+    "미스터리"
+   ],
+   "runtime": 108,
+   "synopsis": "Six college students meet at the final interview of a global IT company. Growing closer as they prepare for the group discussion, they dare to dream that all six might make it — until the day before the interview, when the company announces its verdict: only one will be hired. On the day of the interview, mysterious envelopes arrive, each containing one of their secrets — and suspicion begins to take hold. Who among the six is the liar?",
+   "synopsisKo": "치열한 경쟁률을 뚫고 최종면접에 오른 6명의 지원자. 한 달간 팀 토론을 준비하며 전원 합격을 꿈꾸던 이들에게 제한시간 2시간 동안 단 1명의 합격자를 직접 뽑으라는 과제가 주어진다. 관찰 카메라의 압박 속에 합격자를 가려내기 위한 토론과 투표를 이어가던 중 그들은 각자의 이름이 적힌 의문의 봉투를 발견한다. 봉투가 열릴 때마다 진실을 알 수 없는 비밀들이 공개되고, 공정한 경쟁을 약속했던 최종면접은 걷잡을 수 없는 폭로전으로 치닫는데...",
+   "releaseDate": "2026-11-04",
+   "tmdbId": 1545057,
+   "poster": "https://image.tmdb.org/t/p/w780/wImwvRmbR28hPNDmaj5W7zvxk0T.jpg",
+   "still": "https://image.tmdb.org/t/p/w1280/zAaCSWZCs9IgEn7GiUkDuEtYQKf.jpg",
+   "artCheckedAt": 1794436938004,
+   "trailer": {
+    "id": "htM8Y6iMC0o",
+    "title": "[최종면접] 리뷰 예고편",
+    "channel": "잇츠뉴 It'sNEW",
+    "thumb": "https://i.ytimg.com/vi/htM8Y6iMC0o/maxresdefault.jpg"
+   }
+  },
+  {
+   "id": "gx-street-fighter",
+   "title": "Street Fighter",
+   "titleKo": "스트리트 파이터",
+   "year": 2026,
+   "genres": [
+    "Action"
+   ],
+   "genresKo": [
+    "액션"
+   ],
+   "runtime": 119,
+   "synopsis": "In 1993, estranged Street Fighters Ryu and Ken Masters are thrown back into combat when the mysterious Chun-Li recruits them for the next World Warrior Tournament: a brutal clash of fists, fate, and fury. But behind this battle royale lies a deadly conspiracy that forces them to face off against each other and the demons of their past. And if they don't, it's GAME OVER!",
+   "synopsisKo": "1993년, 숙명의 라이벌 류와 켄은 미스터리한 여성 춘리의 제안으로 세계 최강의 파이터들이 모인 '월드 워리어 토너먼트'에 참여하게 된다. 라운드가 거듭될수록 두 사람은 목숨을 건 배틀 로얄 속에 숨겨진 거대한 음모의 실체를 마주하게 되는데…",
+   "releaseDate": "2026-10-14",
+   "tmdbId": 1153576,
+   "poster": "https://image.tmdb.org/t/p/w780/3EgtiR2ewNQxjJ1qizhDe4IrpPk.jpg",
+   "still": "https://image.tmdb.org/t/p/w1280/3BBjkQmdGacKYZtpmK2vIfuDmON.jpg",
+   "artCheckedAt": 1794436938008,
+   "trailer": {
+    "id": "Xt4X4FvXk2A",
+    "title": "Street Fighter | Official Trailer (2026 Movie)",
+    "channel": "Paramount Pictures",
+    "thumb": "https://i.ytimg.com/vi/Xt4X4FvXk2A/maxresdefault.jpg"
+   }
+  },
+  {
+   "id": "gx-heart-of-the-beast",
+   "title": "Heart of the Beast",
+   "titleKo": "하트 오브 비스트",
+   "year": 2026,
+   "genres": [
+    "Drama",
+    "Action"
+   ],
+   "genresKo": [
+    "드라마",
+    "액션"
+   ],
+   "runtime": 102,
+   "synopsis": "After a harrowing plane crash, Special Forces officer James Belmont and his combat dog, Odin, find themselves stranded deep in the Alaskan wilderness. Together, they are forced into a brutal fight for survival against the elements.",
+   "synopsisKo": "특수부대에서 은퇴한 주임원사 제임스 벨몬트와 그의 군견 오딘. 전장에서 서로의 목숨을 지켜온 두 전우는 전쟁이 끝난 뒤에도 악몽과 트라우마에 시달린다. 둘은 수상비행기를 타고 알래스카의 외딴 호숫가를 찾아 잠시 고요한 시간을 보내지만, 돌아오는 하늘길에서 비행기가 추락하면서 문명과 단절된 광활한 황야 한가운데에 고립되고 만다. 가장 가까운 사람의 흔적까지는 무려 93킬로미터. 부상당한 몸을 이끌고 구조를 향해 걸음을 내딛은 제임스와 오딘 앞에는 거센 급류와 깎아지른 협곡, 굶주린 회색곰과 늑대 무리가 기다리고 있다. 인간의 잔혹함을 견뎌낸 개와 상처투성이가 된 사내, 이제 서로가 유일한 버팀목이 된 두 영혼은 과연 집으로 돌아갈 수 있을까?",
+   "tmdbId": 1263337,
+   "poster": "https://image.tmdb.org/t/p/w780/zC4E522V1n3H4SGdYOaiqhF5DnS.jpg",
+   "still": "https://image.tmdb.org/t/p/w1280/6uVRPFflyJpo8Cx872olmlGTWla.jpg",
+   "artCheckedAt": 1794436938004,
+   "trailer": {
+    "id": "zU8DBjKzACo",
+    "title": "[하트 오브 비스트] 두 심장의 동행",
+    "channel": "ParamountKR",
+    "thumb": "https://i.ytimg.com/vi/zU8DBjKzACo/maxresdefault.jpg"
+   }
+  },
+  {
+   "id": "gx-detective-conan-the-counterfeit-case-of-ultra-30",
+   "title": "Detective Conan: The Counterfeit Case of Ultra 30",
+   "titleKo": "명탐정 코난 30호 살인사건",
+   "year": 2026,
+   "genres": [
+    "Mystery",
+    "Animation"
+   ],
+   "genresKo": [
+    "미스터리",
+    "애니메이션"
+   ],
+   "runtime": 94,
+   "synopsis": "As a new 10,000-yen banknote featuring the Touto Tower design is issued and the nation is swept up in excitement, Conan and the Junior Detective League, accompanied by Professor Agasa, Ran, and Sonoko, visit the Nagano factory of the Japan Banknote Printing Bureau. Meanwhile, counterfeit money is discovered at the scene of a murder in Tokyo, prompting the Metropolitan Police Department to establish an investigation headquarters. As the unprecedented circulation of counterfeit new banknotes throws the public into confusion, Conan and Heiji head to Osaka, where the counterfeit money is believed to have been printed.",
+   "synopsisKo": "‘토토 타워’가 디자인된 1만 엔 신권 지폐가 발행되어 세상이 떠들썩한 가운데, 코난과 어린이 탐정단, 아가사 박사, 란과 소노코는 지폐 인쇄국 나가노 공장을 방문한다. 그 무렵, 경시청에서는 살인 사건 현장에서 발견된 신권 위조지폐로 인해 수사본부가 꾸려지고, 일본에서 발견된 30번째 위조지폐라는 점으로 인해 통칭 ‘30호 사건’으로 명명된다. 신권의 위조지폐 사건이 보도되면서 전국이 혼란해진 가운데 코난은 위조지폐가 인쇄된 것으로 추정되는 오사카의 지폐 인쇄국으로 향하고 거기서 헤이지가 수사에 합류한다. 그 외 시즈오카현과 가나가와현 등 각 지역에 위치한 지폐 인쇄국의 조사를 위해, 나가노현경의 야마토 칸스케, 모로후시 타카아키, 우에하라 유이 그리고 시즈오카현경의 요코미조 산고, 가나가와현경의 요코미조 쥬고 및 군마현경, 오사카부 경찰, 교토부 경찰까지 전국 경찰청에 이어 공안 후루야 레이, FBI 아카이 슈이치가 총출동해 국가적 위기에 맞선다! 통칭 30호, 신권 위조지폐 사건 발생! 전대미문 사건을 수사하기 위해 전원 출동! 국가적 위기에 맞서라!",
+   "tmdbId": 1777750,
+   "poster": "https://image.tmdb.org/t/p/w780/8VIxElJnoGXJH4p3Av2BQwgcxpC.jpg",
+   "still": "https://image.tmdb.org/t/p/w1280/v0T74v8LPZBSL247oGeTOp06tnm.jpg",
+   "artCheckedAt": 1794436939599,
+   "trailer": {
+    "id": "1lSHdaYGEFQ",
+    "title": "[명탐정 코난: 30호 살인 사건] 코난(에도가와 코난) 캐릭터 예고편(자막)｜11월 5일 CGV 단독 개봉",
+    "channel": "Tooniverse-투니버스",
+    "thumb": "https://i.ytimg.com/vi/1lSHdaYGEFQ/maxresdefault.jpg"
+   }
+  },
+  {
+   "id": "gx-the-cat-in-the-hat",
+   "title": "The Cat in the Hat",
+   "titleKo": "모자 쓴 고양이",
+   "year": 2026,
+   "genres": [
+    "Adventure",
+    "Animation",
+    "Comedy",
+    "Family"
+   ],
+   "genresKo": [
+    "모험",
+    "애니메이션",
+    "코미디",
+    "가족"
+   ],
+   "runtime": 107,
+   "synopsis": "Assigned his toughest mission yet, the Cat must cheer up siblings Gabby and Sebastian as they adjust to life in a new town. Known for pushing boundaries, this agent of chaos must prove himself or risk losing his magical hat forever.",
+   "synopsisKo": "이제껏 본 적 없는 ‘씽’나는 ‘냥’리법석이 펼쳐진다! 기상천외한 마법으로 소동을 일으키는 ‘모자 쓴 고양이’에게 주어진 특급 임무! 잃어버린 ‘돌림시계’를 되찾기 위해 떠나는 새로운 모험! 상상력과 영감을 담당하는 비밀 기관 I.I.I.I.의 요원인 ‘모자 쓴 고양이’는 새로운 동네로 이사한 뒤 적응에 힘들어하는 남매 ‘가비’와 ‘세바스찬’에게 웃음과 기쁨을 되찾아 주라는 임무를 맡게 된다. 하지만 사고뭉치 ‘모자 쓴 고양이’는 집안을 난장판으로 만드는 것도 모자라 마법의 ‘돌림시계’를 잃어버리고 만다. 요원으로서의 능력을 검증받을 수 있는 마지막 기회, ‘모자 쓴 고양이’는 ‘가비’와 ‘세바스찬’ 남매에게 도움을 요청하는데... 과연 ‘돌림시계’를 되찾고 남매의 소원도 이루어줄 수 있을까?",
+   "releaseDate": "2026-11-06",
+   "tmdbId": 1117898,
+   "poster": "https://image.tmdb.org/t/p/w780/lgLg6T1kv7fjfANRNM1QSvPKDJM.jpg",
+   "still": "https://image.tmdb.org/t/p/w1280/9y9o686DsQg0KzPtERzcW7Cf8IE.jpg",
+   "artCheckedAt": 1794436939597,
+   "trailer": {
+    "id": "nx6ptOvWqgI",
+    "title": "[모자 쓴 고양이] 3차 예고편",
+    "channel": "Warner Bros. Korea",
+    "thumb": "https://i.ytimg.com/vi/nx6ptOvWqgI/maxresdefault.jpg"
+   }
+  },
+  {
+   "id": "gx-puella-magi-madoka-magica-the-movie-walpurgisnacht-rising",
+   "title": "Puella Magi Madoka Magica the Movie -Walpurgisnacht: Rising-",
+   "titleKo": "극장판 마법소녀 마도카☆마기카 〈발푸르기스의 회천〉",
+   "year": 2026,
+   "genres": [
+    "Animation"
+   ],
+   "genresKo": [
+    "애니메이션"
+   ],
+   "runtime": 120,
+   "synopsis": "After the events of Rebellion, the world appears to be in balance—but that peace is fragile. As a new threat connected to Walpurgisnacht emerges, Homura Akemi is forced to face the consequences of her choices and question how far she is willing to go to protect Madoka.",
+   "synopsisKo": "어느 지방 도시 미타키하라시에 사는 카나메 마도카는 조금 소극적이지만 어디에나 있는 여자 중학생. 하지만 \"마법소녀\"가 된 마녀와 싸우는 소녀들이 존재한다는 것을 알게 되고, 그 싸움에 자신도 휘말린다. 마법소녀들이 다치고 쓰러져 가는 모습을 비관한 그녀는, 큐베에게 「모든 마녀를 태어나기 전에 없애고 싶다」라고 빈다. 이리하여 마도카는 「원환의 이치」라고 불리는 초상적인 개념이 되었고, 그 힘에 의해 세계는 마녀가 존재하지 않는 곳으로 다시 만들어졌다. 아케미 호무라는 마도카의 마지막 의지를 가슴에 품고, 마녀를 대체하여 창궐하게 된 「마수」들과 계속 싸울 것을 맹세한다.",
+   "tmdbId": 822653,
+   "poster": "https://image.tmdb.org/t/p/w780/2EhEAK8AvVaC01dhJ7rXBd2orZr.jpg",
+   "still": "https://image.tmdb.org/t/p/w1280/xzm3RfWh932rS28WErNC3u8qzVm.jpg",
+   "artCheckedAt": 1794436939498,
+   "trailer": {
+    "id": "g0CsWEIb6D4",
+    "title": "Puella Magi Madoka Magica the Movie -Walpurgisnacht Rising- | OFFICIAL TRAILER #3",
+    "channel": "Aniplex USA",
+    "thumb": "https://i.ytimg.com/vi/g0CsWEIb6D4/maxresdefault.jpg"
+   }
+  },
+  {
+   "id": "gx-wild-horse-nine",
+   "title": "Wild Horse Nine",
+   "titleKo": "와일드 호스 나인",
+   "year": 2026,
+   "genres": [
+    "Mystery",
+    "Crime",
+    "Thriller"
+   ],
+   "genresKo": [
+    "미스터리",
+    "범죄",
+    "스릴러"
+   ],
+   "runtime": 117,
+   "synopsis": "Shortly before the 1973 Chilean coup, CIA agents Chris and Lee are dispatched from Santiago to Easter Island by their bureau chief, MJ. Amongst the Island's iconic statues, and as the longtime partners wrestle with their dark pasts and present conspiracies, Chris's newfound bond with a pair of rebellious students threatens to send everyone’s trip to this remote paradise sideways.",
+   "synopsisKo": "1973년 칠레 쿠데타를 앞두고 이스터섬으로 파견된 CIA 요원 ‘크리스’와 ‘리’가 임무를 수행하던 중 과거의 비밀과 정체불명의 음모에 휘말리게 되는 미스터리 첩보 스릴러",
+   "tmdbId": 891621,
+   "poster": "https://image.tmdb.org/t/p/w780/iVWvR4BWhdirFIMQwS1yNp2Hcft.jpg",
+   "still": "https://image.tmdb.org/t/p/w1280/3uLA0ujne91bkzFStZICCYeqhnt.jpg",
+   "artCheckedAt": 1794436939716,
+   "trailer": {
+    "id": "2QI__DylUNk",
+    "title": "[와일드 호스 나인] 파이널 예고편",
+    "channel": "20th Century Studios Korea",
+    "thumb": "https://i.ytimg.com/vi/2QI__DylUNk/maxresdefault.jpg"
+   }
+  }
+ ],
+ "theaters": [
+  {
+   "id": "ChIJ9SfsX-mkfDURESE4aWcPOUQ",
+   "name": "CGV Konkuk Univ.",
+   "nameKo": "CGV 건대입구",
+   "address": "26 Achasan-ro 30-gil, Gwangjin District",
+   "addressKo": "광진구 아차산로30길 26",
+   "lat": 37.539752799999995,
+   "lon": 127.0667922,
+   "rating": 3.8
+  },
+  {
+   "id": "ChIJqVKnNOakfDURdM5EH2iL7yk",
+   "name": "Lotte Cinema Konkuk Univ.",
+   "nameKo": "롯데시네마 건대입구",
+   "address": "262 Achasan-ro, Gwangjin District",
+   "addressKo": "광진구 아차산로 262",
+   "lat": 37.538487599999996,
+   "lon": 127.07321470000001,
+   "rating": 4.2
+  },
+  {
+   "id": "ChIJe0dzmYqlfDUR1CSwiL31AsE",
+   "name": "Megabox Gunja",
+   "nameKo": "메가박스 군자",
+   "address": "289 Neungdong-ro, Gwangjin District",
+   "addressKo": "광진구 능동로 289",
+   "lat": 37.555789499999996,
+   "lon": 127.07833839999999,
+   "rating": 3.9
+  },
+  {
+   "id": "ChIJB2NsZRujfDURWwZkCRP--7c",
+   "name": "CGV Wangsimni",
+   "nameKo": "CGV 왕십리",
+   "address": "Seongdong-gu, Wangsimnigwangjang-ro, 17 비트플렉스몰 5층",
+   "addressKo": "성동구 왕십리광장로 17 비트플렉스몰 5층",
+   "lat": 37.5620246,
+   "lon": 127.0382293,
+   "rating": 4.3
+  },
+  {
+   "id": "ChIJS7WJc4mjfDURiCRiZ6eNico",
+   "name": "CGV Cheongdam Cinecity",
+   "nameKo": "CGV 청담씨네시티",
+   "address": "Gangnam District, Sinsa-dong, 651 21번지 14층",
+   "addressKo": "강남구 신사동 651 21번지 14층",
+   "lat": 37.522836999999996,
+   "lon": 127.03700920000001,
+   "rating": 4.2
+  },
+  {
+   "id": "ChIJ9WVuBJKjfDURdmUDu0JW4sQ",
+   "name": "CGV 압구정",
+   "nameKo": "CGV 압구정",
+   "address": "45 Apgujeong-ro 30-gil, Gangnam District",
+   "addressKo": "강남구 압구정로30길 45",
+   "lat": 37.5242734,
+   "lon": 127.0294158,
+   "rating": 4
+  },
+  {
+   "id": "ChIJ05d9-I2jfDURAgO4m64iEBs",
+   "name": "Cine de Chef, Apgujeong",
+   "nameKo": "씨네드쉐프 압구정점",
+   "address": "Gangnam District, Apgujeong-ro 30-gil, 45 CGV 압구정 신관 지하 5층",
+   "addressKo": "강남구 압구정로30길 45 CGV 압구정 신관 지하 5층",
+   "lat": 37.5242992,
+   "lon": 127.0293402,
+   "rating": 4.2
+  },
+  {
+   "id": "ChIJwVG6YGqkfDURa-2ofSqRGSM",
+   "name": "Megabox COEX",
+   "nameKo": "메가박스 코엑스",
+   "address": "524 Bongeunsa-ro, Gangnam District",
+   "addressKo": "강남구 봉은사로 524",
+   "lat": 37.5126572,
+   "lon": 127.05865229999999,
+   "rating": 4.4
+  }
+ ]
+}

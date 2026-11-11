@@ -14,6 +14,11 @@ data providers directly, and to the car through the Pleos Connect SDK and the st
 > yet. Showtimes are a representative schedule, the seat map is generated, **no payment is taken and no ticket is
 > issued**. The screens run the purchase as the finished product would. See [Simulated ticketing](#simulated-ticketing).
 
+> **It runs without any API key.** Out of the box Mo-Tix is in *cached mode*: it shows a Seoul lineup saved with the
+> app (Seongsu-dong, captured 2026-11-12: 8 films, 8 theaters), so the whole flow works on a fresh build. The
+> **Saved / Live** switch on the lineup turns on live listings for wherever the car is, once the build has your own
+> keys. See [Cached mode](#cached-mode).
+
 ![The lineup in Korean on the Pleos Connect emulator](docs/screenshots/ko/04_lineup_film_selected.jpg)
 
 | Trailer, parked | Theaters and showtimes | Seats |
@@ -82,6 +87,19 @@ Everything from the showtime chips to the QR code sits behind one interface,
 A multiplex or booking-agency integration implements the same interface (real showtimes, seat holds, payment, ticket
 delivery) and replaces the simulation; no screen changes. The app's screens do not label this as a simulation.
 
+## Cached mode
+
+`cachedMode` is on by default. In it, the films, artwork addresses, trailer ids and theaters come from
+[`app/src/main/assets/snapshot/seoul.json`](app/src/main/assets/snapshot/seoul.json), a snapshot of what the live
+sources returned for Seongsu-dong, Seoul, on 2026-11-12. The lineup says so ("as of Thu, Nov 12").
+
+- **No keys and no location permission are needed.** The car is treated as being where the snapshot was captured.
+- Everything after the listings is the same as live: showtimes are made for today, posters and trailers stream from
+  TMDB and YouTube (so a network connection is still needed), and Get route goes to the real Pleos navigation.
+- The **Saved / Live** switch on the lineup changes mode. Live needs keys in the build (below) and the car's position;
+  a build without keys says so and stays on the saved listings.
+- To refresh the snapshot, see [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md#cached-mode-and-the-snapshot).
+
 ## Build
 
 Requirements: JDK 17, Android SDK Platform 34. The Pleos SDKs come from 42dot's public Maven repository
@@ -91,7 +109,10 @@ Requirements: JDK 17, Android SDK Platform 34. The Pleos SDKs come from 42dot's 
 cp local.properties.example local.properties   # then fill in sdk.dir and the keys
 ./gradlew assembleDebug                         # app/build/outputs/apk/debug/app-debug.apk
 ./gradlew assembleRelease                       # signed when MOTIX_KEYSTORE is set in local.properties
+./gradlew assembleRelease -PnoKeys              # the same, with no API keys in the APK (cached mode only)
 ```
+
+Keys are optional: with none, the app runs in cached mode.
 
 ### Keys
 
@@ -107,7 +128,7 @@ cp local.properties.example local.properties   # then fill in sdk.dir and the ke
 restricted, quota-capped keys, and not for production. `ListingsRepository` is the seam: a hosted implementation keeps
 the keys on a server and the app ships without any.
 
-Without keys the app builds and runs, and says that it has none.
+An APK you hand to someone else should be the `-PnoKeys` build: it has no keys in it and shows the saved listings.
 
 ## Run it on the Pleos Connect emulator
 
@@ -119,8 +140,9 @@ Without keys the app builds and runs, and says that it has none.
    adb -s <serial> install -r app/build/outputs/apk/debug/app-debug.apk
    adb -s <serial> emu geo fix 127.0557 37.5446      # longitude first: Seongsu-dong, Seoul
    ```
-3. Open **Mo-Tix** from the Pleos app library. On the first launch it explains why it wants the car's position, then
-   Pleos asks twice (Android location, and the Pleos fused position).
+3. Open **Mo-Tix** from the Pleos app library. It opens on the saved Seoul lineup. Switch to **Live** (a build with
+   keys) and it explains why it wants the car's position, then Pleos asks twice (Android location, and the Pleos
+   fused position).
 4. **Driving states**: use the *Pleos Connect Virtual Console* that the emulator serves (gear, speed). From a terminal:
    ```bash
    adb -s <serial> forward tcp:18088 tcp:8088
@@ -148,6 +170,7 @@ docs/         ARCHITECTURE.md · SCREENS.md · screenshots/
 ## Known limits
 
 - Showtimes, seats, payment and tickets are simulated (above).
+- The saved listings are a dated sample (2026-11-12); the films in it will go out of date.
 - The trailer is the stock YouTube embedded player; YouTube may show an ad before a trailer.
 - Google's Search suggestions strip for the grounded film list is switched off in this build
   (`SHOW_SEARCH_SUGGESTIONS` in `ui/TrailerScreen.kt`). Google's terms for Grounding with Google Search ask for it to

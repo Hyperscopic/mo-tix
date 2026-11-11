@@ -13,6 +13,11 @@ Kotlin과 Jetpack Compose로 만든 네이티브 앱입니다. 별도의 서버�
 > 않습니다. 상영 시간은 대표 시간표이고 좌석 배치는 생성된 것이며, **실제 결제는 이루어지지 않고 티켓도 발급되지
 > 않습니다.** 화면은 완성된 제품과 같은 흐름으로 동작합니다. 자세한 내용은 [예매 시뮬레이션](#예매-시뮬레이션)을 참고하세요.
 
+> **API 키 없이도 실행됩니다.** Mo-Tix는 기본적으로 *캐시 모드*로 동작합니다. 앱에 함께 저장된 서울 상영 정보(성수동,
+> 2026년 11월 12일 기준: 영화 8편, 극장 8곳)를 보여 주므로 새로 빌드한 상태에서도 전체 흐름을 확인할 수 있습니다.
+> 상영작 화면의 **저장 데이터 / 실시간** 전환 버튼으로, 직접 발급한 키를 넣어 빌드한 경우 차량 위치 기준의 실시간 상영
+> 정보를 켤 수 있습니다. [캐시 모드](#캐시-모드)를 참고하세요.
+
 ![Pleos Connect 에뮬레이터에서 실행한 상영작 화면](docs/screenshots/ko/04_lineup_film_selected.jpg)
 
 | 예고편(주차 중) | 극장과 상영 시간 | 좌석 선택 |
@@ -82,6 +87,20 @@ certified by TMDB.* (이 제품은 TMDB API를 사용하지만 TMDB의 보증이
 멀티플렉스나 예매 대행사 API를 연동할 때는 같은 인터페이스를 구현해(실시간 상영 정보, 좌석 선점, 결제, 티켓 발급)
 시뮬레이션을 교체하면 되며, 화면은 바뀌지 않습니다. 앱 화면에는 시뮬레이션이라는 표시가 없습니다.
 
+## 캐시 모드
+
+`cachedMode`는 기본으로 켜져 있습니다. 이 모드에서는 영화, 이미지 주소, 예고편 ID, 극장 정보를
+[`app/src/main/assets/snapshot/seoul.json`](app/src/main/assets/snapshot/seoul.json)에서 읽습니다. 2026년 11월 12일에
+서울 성수동을 기준으로 실제 데이터 출처에서 받아 온 결과를 저장한 것이며, 상영작 화면에 '11월 12일 (목) 기준'으로
+표시됩니다.
+
+- **키도, 위치 권한도 필요 없습니다.** 차량이 스냅숏을 저장한 위치에 있는 것으로 간주합니다.
+- 상영 정보 이후의 동작은 실시간 모드와 같습니다. 상영 시간은 오늘 날짜로 만들어지고, 포스터와 예고편은 TMDB와
+  YouTube에서 스트리밍되며(네트워크 연결은 필요합니다), '경로 안내'는 실제 Pleos 내비게이션으로 전달됩니다.
+- 상영작 화면의 **저장 데이터 / 실시간** 버튼으로 모드를 바꿉니다. 실시간 모드에는 빌드에 포함된 키(아래 참고)와 차량
+  위치가 필요하며, 키가 없는 빌드는 그 사실을 안내하고 저장 데이터를 계속 보여 줍니다.
+- 스냅숏을 갱신하는 방법은 [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md#cached-mode-and-the-snapshot)(영문)에 있습니다.
+
 ## 빌드
 
 필요 환경: JDK 17, Android SDK Platform 34. Pleos SDK는 42dot의 공개 Maven 저장소
@@ -91,7 +110,10 @@ certified by TMDB.* (이 제품은 TMDB API를 사용하지만 TMDB의 보증이
 cp local.properties.example local.properties   # sdk.dir과 키를 채웁니다
 ./gradlew assembleDebug                         # app/build/outputs/apk/debug/app-debug.apk
 ./gradlew assembleRelease                       # local.properties에 MOTIX_KEYSTORE가 있으면 서명됩니다
+./gradlew assembleRelease -PnoKeys              # 같은 빌드이지만 APK에 API 키를 넣지 않습니다(캐시 모드 전용)
 ```
+
+키는 선택 사항입니다. 키가 없으면 앱은 캐시 모드로 동작합니다.
 
 ### 키
 
@@ -107,7 +129,7 @@ cp local.properties.example local.properties   # sdk.dir과 키를 채웁니다
 환경에는 적합하지 않습니다. `ListingsRepository`가 교체 지점입니다. 서버에서 키를 관리하는 구현으로 바꾸면 앱에는
 키가 들어가지 않습니다.
 
-키가 없어도 앱은 빌드되고 실행되며, 키가 없다는 안내를 표시합니다.
+다른 사람에게 전달하는 APK는 `-PnoKeys` 빌드를 사용하세요. 키가 들어 있지 않으며 저장된 상영 정보를 보여 줍니다.
 
 ## Pleos Connect 에뮬레이터에서 실행
 
@@ -119,8 +141,8 @@ cp local.properties.example local.properties   # sdk.dir과 키를 채웁니다
    adb -s <serial> install -r app/build/outputs/apk/debug/app-debug.apk
    adb -s <serial> emu geo fix 127.0557 37.5446      # 경도가 먼저입니다: 서울 성수동
    ```
-3. Pleos 앱 목록에서 **Mo-Tix**를 엽니다. 처음 실행하면 차량 위치가 필요한 이유를 안내한 뒤, Pleos가 권한을 두 번
-   묻습니다(Android 위치, Pleos 융합 위치).
+3. Pleos 앱 목록에서 **Mo-Tix**를 엽니다. 저장된 서울 상영작 화면으로 시작합니다. 키를 넣은 빌드에서 **실시간**으로
+   전환하면 차량 위치가 필요한 이유를 안내한 뒤, Pleos가 권한을 두 번 묻습니다(Android 위치, Pleos 융합 위치).
 4. **주행 상태**는 에뮬레이터가 제공하는 *Pleos Connect Virtual Console*(기어, 속도)로 바꿉니다. 터미널에서는 다음과
    같이 할 수 있습니다.
    ```bash
@@ -149,6 +171,7 @@ docs/         ARCHITECTURE.md · SCREENS.md · screenshots/
 ## 알려진 제한 사항
 
 - 상영 시간, 좌석, 결제, 티켓은 시뮬레이션입니다(위 참고).
+- 저장된 상영 정보는 특정 날짜(2026년 11월 12일)의 예시 데이터이므로 시간이 지나면 실제 상영작과 달라집니다.
 - 예고편은 YouTube 기본 임베디드 플레이어로 재생되며, YouTube가 예고편 앞에 광고를 표시할 수 있습니다.
 - 상영작 목록에 붙는 Google 검색 제안 표시는 이 빌드에서 꺼 두었습니다(`ui/TrailerScreen.kt`의
   `SHOW_SEARCH_SUGGESTIONS`). Google 검색 그라운딩 약관은 그라운딩 결과와 함께 검색 제안을 표시하도록 요구하므로,

@@ -10,7 +10,10 @@ val localProps = Properties().apply {
     rootProject.file("local.properties").takeIf { it.exists() }?.inputStream()?.use { load(it) }
 }
 fun local(key: String, default: String = "") = (localProps.getProperty(key) ?: System.getenv(key) ?: default).trim()
-fun quoted(key: String, default: String = "") = "\"" + local(key, default).replace("\\", "\\\\").replace("\"", "\\\"") + "\""
+// -PnoKeys builds an APK with no API keys in it (what gets shared): it runs on the bundled snapshot, cached mode only.
+val noKeys = project.hasProperty("noKeys")
+fun quoted(key: String, default: String = "") =
+    "\"" + (if (noKeys) "" else local(key, default)).replace("\\", "\\\\").replace("\"", "\\\"") + "\""
 
 // Release signing: a keystore kept outside the repository, named in local.properties.
 val keystorePath = local("MOTIX_KEYSTORE")
@@ -23,8 +26,8 @@ android {
         applicationId = "com.hyperscopic.motix"
         minSdk = 34 // Pleos Connect is Android Automotive OS 14
         targetSdk = 34
-        versionCode = 3
-        versionName = "1.0.2"
+        versionCode = 4
+        versionName = "1.1.0"
         resourceConfigurations += listOf("en", "ko")
 
         // Films: Gemini with Grounding with Google Search (Vertex AI when a project is set, else the Gemini API).

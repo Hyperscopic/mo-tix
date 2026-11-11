@@ -15,9 +15,73 @@ import java.time.ZonedDateTime
  * Not kept: anything from Google Places. Theater names and addresses are asked for again on every launch (it takes
  * about a second); the Places terms do not allow storing them.
  */
+/**
+ * A dated sample of the listings for one place (Seongsu-dong, Seoul), bundled with the app. It is what Mo-Tix shows in
+ * cached mode: films, artwork addresses, trailer ids and theaters as they were on [capturedAtMillis]. The showtimes on
+ * top of it are still made for today.
+ */
+data class Snapshot(
+    val market: Market,
+    val lat: Double,
+    val lon: Double,
+    val areaKo: String,
+    val areaEn: String,
+    val capturedAtMillis: Long,
+    val films: FilmList,
+    val theaters: List<Theater>,
+)
+
 class LineupStore(context: Context) {
     private val dir: File = context.filesDir
+    private val assets = context.assets
     private val prefs = context.getSharedPreferences("motix", Context.MODE_PRIVATE)
+
+    /**
+     * Cached mode: show the bundled [Snapshot] instead of asking the providers. On by default, so a build with no API
+     * keys shows the whole app.
+     */
+    var cachedMode: Boolean
+        get() = prefs.getBoolean("cachedMode", true)
+        set(value) = prefs.edit().putBoolean("cachedMode", value).apply()
+
+    /** The sample listings bundled with the app (assets/snapshot/seoul.json), or null when there are none. */
+    fun loadSnapshot(): Snapshot? = runCatching {
+        val o = JSONObject(assets.open(SNAPSHOT_ASSET).use { it.readBytes().toString(Charsets.UTF_8) })
+        val market = Market.of(o.optString("market")) ?: return null
+        val at = o.optLong("capturedAt")
+        val films = o.optJSONArray("films").objects().map { it.toFilm() }
+        if (films.isEmpty()) return null
+        val area = o.obj("area")
+        Snapshot(
+            market, o.getDouble("lat"), o.getDouble("lon"), area?.str("ko").orEmpty(), area?.str("en").orEmpty(), at,
+            FilmList(market, films, SearchCredit(), at), o.optJSONArray("theaters").objects().map { it.toTheater() },
+        )
+    }.getOrNull()
+
+    /**
+     * Debug builds only: what a live load produced, written to files/snapshot_export.json in the snapshot format, so
+     * the bundled sample can be refreshed (see docs/ARCHITECTURE.md).
+     */
+    fun exportSnapshot(films: FilmList, theaters: List<Theater>, lat: Double, lon: Double, area: String?) {
+        runCatching {
+            File(dir, "snapshot_export.json").writeText(
+                JSONObject().put("market", films.market.code).put("lat", lat).put("lon", lon)
+                    .put("area", JSONObject().put("ko", area).put("en", area))
+                    .put("capturedAt", films.fetchedAtMillis)
+                    .put("films", JSONArray(films.films.map { it.toJson() }))
+                    .put("theaters", JSONArray(theaters.map { it.toJson() })).toString(1),
+            )
+        }
+    }
+
+    private fun Theater.toJson(): JSONObject = JSONObject()
+        .put("id", id).put("name", name).put("nameKo", nameKo).put("address", address).put("addressKo", addressKo)
+        .put("lat", lat).put("lon", lon).put("rating", rating)
+
+    private fun JSONObject.toTheater(): Theater = Theater(
+        id = getString("id"), name = getString("name"), nameKo = str("nameKo"), address = optString("address"),
+        addressKo = str("addressKo"), lat = getDouble("lat"), lon = getDouble("lon"), rating = optDouble("rating").takeIf { !it.isNaN() },
+    )
 
     /** The market of the last launch: its list shows before the car has even reported a position. */
     var lastMarket: Market?
@@ -108,6 +172,8 @@ class LineupStore(context: Context) {
     )
 
     companion object {
+        const val SNAPSHOT_ASSET = "snapshot/seoul.json"
+
         /** Google allows grounded results to be stored for up to thirty days. */
         const val MAX_AGE_MS = 30L * 24 * 3600_000
 

@@ -95,10 +95,24 @@ fun LineupScreen(vm: MoTixViewModel, list: FilmList) {
                     style = if (compact) Type.TitleS else Type.TitleM, color = MT.Text, modifier = Modifier.alignByBaseline(),
                 )
                 Spacer(Modifier.width(20.dp))
+                val snapshot = vm.snapshot
+                val areaName = vm.area?.name
                 Text(
-                    vm.area?.let { stringResource(R.string.films_near, list.films.size, it.name) } ?: stringResource(R.string.films_count, list.films.size),
+                    when {
+                        // Saved listings say when they were saved.
+                        vm.cachedMode && snapshot != null && areaName != null -> stringResource(
+                            R.string.films_near_as_of, list.films.size, areaName,
+                            LocalFmt.current.day(java.time.Instant.ofEpochMilli(snapshot.capturedAtMillis).atZone(list.market.zone)),
+                        )
+                        areaName != null -> stringResource(R.string.films_near, list.films.size, areaName)
+                        else -> stringResource(R.string.films_count, list.films.size)
+                    },
                     style = Type.LabelM, color = MT.TextSoft, maxLines = 1, overflow = TextOverflow.Ellipsis, modifier = Modifier.weight(1f).alignByBaseline(),
                 )
+                if (snapshot != null) {
+                    Spacer(Modifier.width(16.dp))
+                    ModeSwitch(vm)
+                }
             }
             val posterWidth = if (compact) 168.dp else 220.dp
             LazyRow(
@@ -114,6 +128,27 @@ fun LineupScreen(vm: MoTixViewModel, list: FilmList) {
             // The Google Search suggestions strip: hidden in this build (see SHOW_SEARCH_SUGGESTIONS).
             if (SHOW_SEARCH_SUGGESTIONS) {
                 SearchSuggestions(vm, list.search, Modifier.fillMaxWidth().padding(horizontal = if (compact) 20.dp else 48.dp).padding(bottom = 12.dp))
+            }
+        }
+    }
+}
+
+/**
+ * Saved or Live: the listings bundled with the app (no API key needed), or the providers' own, for where the car is
+ * (needs keys). A two-part switch, the part in use filled.
+ */
+@Composable
+private fun ModeSwitch(vm: MoTixViewModel) {
+    val shape = RoundedCornerShape(20.dp)
+    Row(Modifier.height(68.dp).clip(shape).background(Color.White.copy(0.08f)).border(1.dp, MT.Line, shape).padding(5.dp)) {
+        for ((cached, label) in listOf(true to R.string.mode_saved, false to R.string.mode_live)) {
+            val on = vm.cachedMode == cached
+            Box(
+                Modifier.fillMaxHeight().tap(RoundedCornerShape(15.dp)) { vm.useCachedListings(cached) }
+                    .background(if (on) Color.White.copy(0.92f) else Color.Transparent).padding(horizontal = 22.dp),
+                contentAlignment = Alignment.Center,
+            ) {
+                Text(stringResource(label), style = Type.LabelM, color = if (on) MT.Bg else MT.TextSoft, fontWeight = if (on) FontWeight.SemiBold else FontWeight.Normal, maxLines = 1)
             }
         }
     }

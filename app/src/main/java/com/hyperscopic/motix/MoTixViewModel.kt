@@ -23,6 +23,7 @@ import com.hyperscopic.motix.data.Market
 import com.hyperscopic.motix.data.Order
 import com.hyperscopic.motix.data.Seat
 import com.hyperscopic.motix.data.Showing
+import com.hyperscopic.motix.data.Snapshot
 import com.hyperscopic.motix.data.SimulatedTicketingPartner
 import com.hyperscopic.motix.data.Theater
 import com.hyperscopic.motix.data.TicketingPartner
@@ -69,6 +70,19 @@ class MoTixViewModel(application: Application) : AndroidViewModel(application) {
     val route: StateFlow<RouteState> = app.navigator.state
     val configured: Boolean get() = listings.configured
 
+    /** The sample listings bundled with the app: what Mo-Tix shows without any API key. */
+    val snapshot: Snapshot? = store.loadSnapshot()
+
+    /**
+     * Cached mode: the listings are the bundled snapshot, not the providers. It is the default, so a build with no
+     * keys shows the whole app. Live listings need keys (and the car position).
+     */
+    var cachedMode by mutableStateOf(snapshot != null && store.cachedMode)
+        private set
+
+    /** Set when Live was asked for in a build that has no keys: the UI says so. */
+    var liveNeedsKeys by mutableStateOf(false)
+
     // ---- Listings ------------------------------------------------------------------------------------------------
 
     var market by mutableStateOf(store.lastMarket)
@@ -95,8 +109,13 @@ class MoTixViewModel(application: Application) : AndroidViewModel(application) {
         set(value) {
             if (field != value) {
                 field = value
-                area = null
-                origin?.let { loadArea(it.lat, it.lon) }
+                val s = snapshot
+                if (cachedMode && s != null) {
+                    area = Area(if (value) s.areaKo else s.areaEn, s.lat, s.lon)
+                } else {
+                    area = null
+                    origin?.let { loadArea(it.lat, it.lon) }
+                }
             }
         }
 
@@ -125,6 +144,7 @@ class MoTixViewModel(application: Application) : AndroidViewModel(application) {
 
     init {
         Images.prune(application)
+        if (cachedMode) applySnapshot()
         viewModelScope.launch { app.location.position.collect { p -> if (p != null) onPosition(p) } }
         viewModelScope.launch {
             while (true) {
@@ -137,8 +157,60 @@ class MoTixViewModel(application: Application) : AndroidViewModel(application) {
         viewModelScope.launch { driving.collect { if (!it.videoAllowed) stack.removeAll { s -> s == Screen.TRAILER || s == Screen.SEARCH } } }
     }
 
+    /** Cached mode: everything on screen comes from the bundled snapshot, placed where it was captured. */
+    private fun applySnapshot() {
+        val s = snapshot ?: return
+        filmsJob?.cancel()
+        theatersJob?.cancel()
+        market = s.market
+        filmList = s.films
+        theaters = s.theaters
+        origin = CarPosition(s.lat, s.lon, CarPosition.Source.LAST_KNOWN, s.capturedAtMillis)
+        area = Area(if (korean) s.areaKo else s.areaEn, s.lat, s.lon)
+        filmsFailed = false
+        theatersFailed = false
+    }
+
+    /** The Saved / Live switch on the lineup. */
+    fun useCachedListings(cached: Boolean) {
+        if (cached == cachedMode) return
+        if (cached) {
+            if (snapshot == null) return
+            cachedMode = true
+            store.cachedMode = true
+            home()
+            filmId = null
+            applySnapshot()
+        } else {
+            if (!configured) {
+                liveNeedsKeys = true // no keys in this build: say so and stay on the saved listings
+                return
+            }
+            cachedMode = false
+            store.cachedMode = false
+            home()
+            filmId = null
+            market = store.lastMarket
+            filmList = market?.let { store.load(it) }
+            theaters = null
+            area = null
+            origin = null
+            position?.let { onPosition(it) }
+        }
+    }
+
+    /** Debug builds write what a live load produced, so the bundled snapshot can be refreshed. */
+    private fun exportForSnapshot() {
+        if (!BuildConfig.DEBUG || cachedMode) return
+        val films = filmList ?: return
+        val shown = theaters ?: return
+        val at = origin ?: return
+        store.exportSnapshot(films, shown, at.lat, at.lon, area?.name)
+    }
+
     private fun onPosition(p: CarPosition) {
         position = p
+        if (cachedMode) return
         val m = Market.at(p.lat, p.lon)
         if (m != market) {
             market = m
@@ -162,6 +234,7 @@ class MoTixViewModel(application: Application) : AndroidViewModel(application) {
 
     /** Fetch the film list when there is none or it has gone stale; always behind what is on screen. */
     fun ensureFilms(force: Boolean = false) {
+        if (cachedMode) return
         val m = market ?: return
         if (filmsJob?.isActive == true) return
         val shown = filmList
@@ -175,6 +248,7 @@ class MoTixViewModel(application: Application) : AndroidViewModel(application) {
                 }
                 if (market == m) filmList = result
                 store.save(result)
+                exportForSnapshot()
             } catch (e: Exception) {
                 Log.w(TAG, "films: ${e.message}")
                 if (filmList == null) filmsFailed = true
@@ -189,6 +263,7 @@ class MoTixViewModel(application: Application) : AndroidViewModel(application) {
         theatersJob = viewModelScope.launch {
             try {
                 theaters = listings.theaters(m, lat, lon)
+                exportForSnapshot()
             } catch (e: Exception) {
                 Log.w(TAG, "theaters: ${e.message}")
                 if (theaters == null) theatersFailed = true
@@ -205,6 +280,7 @@ class MoTixViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun retry() {
+        if (cachedMode) return
         ensureFilms(force = filmList == null)
         origin?.let { if (theaters == null) loadTheaters(it.lat, it.lon) }
     }
@@ -233,6 +309,10 @@ class MoTixViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun back(): Boolean {
+        if (liveNeedsKeys) {
+            liveNeedsKeys = false
+            return true
+        }
         if (creditsOpen) {
             creditsOpen = false
             return true

@@ -8,6 +8,10 @@
     <string name="whats_on_today">오늘의 상영작</string>
     <string name="films_near">%2$s 근처 상영작 %1$d편</string>
     <string name="films_count">현재 상영작 %1$d편</string>
+    <string name="films_near_as_of">%2$s 근처 상영작 %1$d편 · %3$s 기준</string>
+    <string name="mode_saved">저장 데이터</string>
+    <string name="mode_live">실시간</string>
+    <string name="live_needs_keys">실시간 상영 정보를 보려면 API 키가 필요한데, 이 빌드에는 키가 없습니다. local.properties에 키를 넣고 다시 빌드해 주세요(README 참고). 그 전까지는 앱에 저장된 상영 정보를 보여 드립니다.</string>
     <string name="watch_trailer">예고편 보기</string>
     <string name="see_it_nearby">근처에서 보기</string>
     <string name="next_nearby">가장 빠른 상영: %2$s %1$s, %3$s</string>
