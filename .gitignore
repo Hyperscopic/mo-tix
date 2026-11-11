@@ -9,6 +9,8 @@ keystore.properties
 build/
 app/build/
 *.apk
+# The submitted release APK (built with -PnoKeys: no API keys inside)
+!apk/*.apk
 *.aab
 captures/
 
