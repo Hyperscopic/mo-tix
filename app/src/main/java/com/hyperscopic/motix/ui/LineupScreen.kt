@@ -100,10 +100,10 @@ fun LineupScreen(vm: MoTixViewModel, list: FilmList) {
                     style = Type.LabelM, color = MT.TextSoft, maxLines = 1, overflow = TextOverflow.Ellipsis, modifier = Modifier.weight(1f).alignByBaseline(),
                 )
             }
-            val posterWidth = if (compact) 168.dp else 204.dp
+            val posterWidth = if (compact) 168.dp else 220.dp
             LazyRow(
                 state = rememberLazyListState(),
-                contentPadding = PaddingValues(start = if (compact) 24.dp else 52.dp, end = if (compact) 24.dp else 48.dp, top = 16.dp, bottom = 12.dp),
+                contentPadding = PaddingValues(start = if (compact) 24.dp else 52.dp, end = if (compact) 24.dp else 48.dp, top = 16.dp, bottom = 32.dp),
                 horizontalArrangement = Arrangement.spacedBy(if (compact) 16.dp else 22.dp),
             ) {
                 items(list.films, key = { it.id }) { film ->
@@ -111,8 +111,10 @@ fun LineupScreen(vm: MoTixViewModel, list: FilmList) {
                     PosterCard(film, film.id == selected.id, posterWidth) { if (film.id == selected.id) vm.openTheaters() else vm.select(film) }
                 }
             }
-            // Google asks for its Search suggestions to be shown with a grounded answer, as provided.
-            SearchSuggestions(vm, list.search, Modifier.fillMaxWidth().padding(horizontal = if (compact) 20.dp else 48.dp).padding(bottom = 12.dp))
+            // The Google Search suggestions strip: hidden in this build (see SHOW_SEARCH_SUGGESTIONS).
+            if (SHOW_SEARCH_SUGGESTIONS) {
+                SearchSuggestions(vm, list.search, Modifier.fillMaxWidth().padding(horizontal = if (compact) 20.dp else 48.dp).padding(bottom = 12.dp))
+            }
         }
     }
 }

@@ -110,6 +110,13 @@ fun TrailerScreen(vm: MoTixViewModel, film: Film) {
 }
 
 /**
+ * Whether the lineup shows Google's Search suggestions strip. Off in this build: the strip is hidden from the screen.
+ * Google's terms for Grounding with Google Search ask for the suggestions to be displayed with grounded results, so
+ * turn this on (or take the film list from another source) before a public release.
+ */
+const val SHOW_SEARCH_SUGGESTIONS = false
+
+/**
  * Google Search suggestions for the film list (Grounding with Google Search): the chip Google returns
  * (`searchEntryPoint.renderedContent`), rendered as provided. Tapping a suggestion opens Google's results page.
  */

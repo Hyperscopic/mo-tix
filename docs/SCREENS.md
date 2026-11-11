@@ -19,7 +19,7 @@ Showtimes, seats and payment are simulated (see the README). Film artwork belong
 | ![](screenshots/ko/17_half_window_ticket_beside_navigation.jpg) 13. The half window (1:1): the ticket card beside the map | ![](screenshots/ko/18_driving_static_ticket_card.jpg) 14. Driving (D, 40 km/h): the static ticket card only |
 | ![](screenshots/ko/19_half_window_lineup.jpg) 15. The lineup in the half window | ![](screenshots/ko/20_half_window_theaters.jpg) 16. Theaters in the half window |
 | ![](screenshots/ko/21_half_window_showtime_sheet.jpg) 17. A showing in the half window | ![](screenshots/ko/22_my_ticket_full_window.jpg) 18. The ticket in the full window |
-| ![](screenshots/ko/23_sources.jpg) 19. Sources, with the TMDB notice | ![](screenshots/ko/24_google_search_suggestion_page.jpg) 20. A Google Search suggestion opened (parked only) |
+| ![](screenshots/ko/23_sources.jpg) 19. Sources, with the TMDB notice | |
 
 ## English
 

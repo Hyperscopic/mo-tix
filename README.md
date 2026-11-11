@@ -58,7 +58,7 @@ How the pieces fit, the loading and caching rules, and the driving logic: [docs/
 
 | What | Source |
 |---|---|
-| Films in theaters now | Google Gemini 2.5 Flash with **Grounding with Google Search** (the Google Search suggestions are shown with the list, as Google requires) |
+| Films in theaters now | Google Gemini 2.5 Flash with **Grounding with Google Search** |
 | Theaters | **Google Places API (New)**: a text search for CGV, Megabox and Lotte Cinema in Korea, a nearby search in the US |
 | Posters, stills, synopses, running times, official trailer ids | **TMDB API** |
 | Trailers | The official trailer in the **YouTube embedded player**, confirmed with YouTube oEmbed |
@@ -149,6 +149,9 @@ docs/         ARCHITECTURE.md · SCREENS.md · screenshots/
 
 - Showtimes, seats, payment and tickets are simulated (above).
 - The trailer is the stock YouTube embedded player; YouTube may show an ad before a trailer.
+- Google's Search suggestions strip for the grounded film list is switched off in this build
+  (`SHOW_SEARCH_SUGGESTIONS` in `ui/TrailerScreen.kt`). Google's terms for Grounding with Google Search ask for it to
+  be displayed with grounded results: switch it on, or take the film list from another source, before a public release.
 - The film list is whatever Google Search grounding returns that day; a first search takes about 15 to 20 seconds
   (later launches show the last list at once and refresh behind it).
 - On the emulator the navigation app keeps its own simulated position, so its route starts from there, not from

@@ -161,6 +161,11 @@ Grounding with Google Search requires showing the returned Search suggestions wi
 tapped suggestion opens `SearchPage`: Google's results page and nothing else (other hosts are not followed, sign-in is
 not reachable), parked only.
 
+**This is switched off in the current build** (`SHOW_SEARCH_SUGGESTIONS = false` in `ui/TrailerScreen.kt`): the strip
+is hidden from the lineup. The code and the stored suggestions are still there. Before a public release either switch
+it back on or stop using grounded results for the film list (TMDB's now-playing list by region would also remove the
+15-second first search).
+
 ## Not here yet
 
 - A real `TicketingPartner` and a hosted `ListingsRepository`.

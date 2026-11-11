@@ -57,7 +57,7 @@ Kotlin과 Jetpack Compose로 만든 네이티브 앱입니다. 별도의 서버�
 
 | 항목 | 출처 |
 |---|---|
-| 현재 상영작 | Google Gemini 2.5 Flash의 **Google 검색 그라운딩**(Google 요건에 따라 검색 제안을 목록과 함께 표시합니다) |
+| 현재 상영작 | Google Gemini 2.5 Flash의 **Google 검색 그라운딩** |
 | 극장 | **Google Places API (New)**: 한국에서는 CGV·메가박스·롯데시네마 텍스트 검색, 미국에서는 주변 검색 |
 | 포스터, 스틸, 줄거리, 러닝타임, 공식 예고편 ID | **TMDB API** |
 | 예고편 | **YouTube 임베디드 플레이어**의 공식 예고편(YouTube oEmbed로 확인) |
@@ -150,6 +150,9 @@ docs/         ARCHITECTURE.md · SCREENS.md · screenshots/
 
 - 상영 시간, 좌석, 결제, 티켓은 시뮬레이션입니다(위 참고).
 - 예고편은 YouTube 기본 임베디드 플레이어로 재생되며, YouTube가 예고편 앞에 광고를 표시할 수 있습니다.
+- 상영작 목록에 붙는 Google 검색 제안 표시는 이 빌드에서 꺼 두었습니다(`ui/TrailerScreen.kt`의
+  `SHOW_SEARCH_SUGGESTIONS`). Google 검색 그라운딩 약관은 그라운딩 결과와 함께 검색 제안을 표시하도록 요구하므로,
+  공개 배포 전에는 이 옵션을 켜거나 상영작 목록의 출처를 바꿔야 합니다.
 - 상영작 목록은 그날 Google 검색 그라운딩이 돌려준 결과입니다. 첫 검색에는 15~20초 정도 걸리며, 이후에는 마지막
   목록을 바로 보여 주고 뒤에서 새로 고칩니다.
 - 에뮬레이터의 내비게이션 앱은 자체 가상 위치를 사용하므로 경로가 `geo fix` 위치가 아닌 그 위치에서 시작합니다.

@@ -16,9 +16,9 @@ kept only in the app's cache directory, for at most seven days. <https://www.the
 
 ## Google
 
-- **Films in theaters now**: Google Gemini with Grounding with Google Search. The Google Search suggestions returned
-  with a grounded answer (`searchEntryPoint`) are shown with the film list, unmodified, and open Google's results page.
-  A film list is kept on the device for at most thirty days.
+- **Films in theaters now**: Google Gemini with Grounding with Google Search. A film list is kept on the device for at
+  most thirty days. The Google Search suggestions returned with a grounded answer (`searchEntryPoint`) are kept with
+  the list, but showing them is switched off in this build (see "Known limits" in the README).
 - **Theaters**: Google Maps Platform, Places API (New). Theater names and addresses are shown with the "Google Maps"
   attribution and are not stored between launches.
 
