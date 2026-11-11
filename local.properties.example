@@ -1,0 +1,31 @@
+# Copy this file to local.properties and fill it in. local.properties is git-ignored: never commit keys.
+#
+# The keys are compiled into the APK (BuildConfig), so anyone holding the APK can extract them.
+# Restrict every key before you share a build (see "Keys" in README.md), and use a hosted
+# ListingsRepository for anything beyond a demo.
+
+# Android SDK on this machine (Android Studio writes this line for you)
+sdk.dir=C\:\\Users\\you\\AppData\\Local\\Android\\Sdk
+
+# --- Films: Gemini with Grounding with Google Search --------------------------------------------
+# Either a Gemini API key (https://aistudio.google.com/apikey) ...
+GEMINI_API_KEY=
+# ... or a Vertex AI express key: then also name the Cloud project (and, optionally, the location).
+GEMINI_VERTEX_PROJECT=
+GEMINI_VERTEX_LOCATION=us-central1
+
+# --- Theaters: Google Maps Platform, Places API (New) --------------------------------------------
+# Enable "Places API (New)" on the key. Mo-Tix sends X-Android-Package and X-Android-Cert, so the key
+# can be restricted to this Android app (package com.hyperscopic.motix + your signing certificate).
+GOOGLE_API_KEY=
+
+# --- Posters, stills and official trailers: TMDB (https://www.themoviedb.org/settings/api) -------
+# Either the v3 API key or the v4 read access token.
+TMDB_API_KEY=
+TMDB_READ_TOKEN=
+
+# --- Release signing (optional; assembleRelease is unsigned without it) --------------------------
+# Keep the keystore outside the repository.
+#MOTIX_KEYSTORE=C:/Users/you/keystores/motix-release.jks
+#MOTIX_KEYSTORE_PASSWORD=
+#MOTIX_KEY_ALIAS=motix

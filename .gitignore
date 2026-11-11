@@ -18,5 +18,6 @@ captures/
 .kotlin/
 .DS_Store
 
-# Screenshots show film posters and stills (third-party artwork): kept out of git until that is decided.
-docs/screenshots/
+# Screenshots: the 1280 px JPEGs are in the repository; the full-size captures stay local.
+docs/screenshots/**/*.png
+docs/screenshots/**/view/

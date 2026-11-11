@@ -202,9 +202,10 @@ class GoogleListings(private val context: Context, private val keys: Keys) : Lis
             out = out.copy(
                 tmdbId = art.id ?: out.tmdbId, posterUrl = art.poster ?: out.posterUrl, stillUrl = art.backdrop ?: out.stillUrl,
                 runtimeMinutes = out.runtimeMinutes ?: art.runtime,
-                // The distributor synopsis TMDB carries, when the search answer had none.
-                synopsis = out.synopsis.ifBlank { art.overviewEn.orEmpty() },
-                synopsisKo = out.synopsisKo ?: art.overviewKo,
+                // The distributor synopsis and the local title TMDB carries, where the search answer was thin.
+                synopsis = art.overviewEn ?: out.synopsis,
+                synopsisKo = art.overviewKo ?: out.synopsisKo,
+                titleKo = out.titleKo ?: art.titleKo?.takeIf { norm(it) != norm(out.title) },
             )
         }
         if (out.trailer == null || (listedId != null && out.trailer?.videoId != listedId)) {
@@ -221,7 +222,7 @@ class GoogleListings(private val context: Context, private val keys: Keys) : Lis
 
     private class Art(
         val id: Int?, val poster: String?, val backdrop: String?, val runtime: Int? = null,
-        val overviewEn: String? = null, val overviewKo: String? = null,
+        val overviewEn: String? = null, val overviewKo: String? = null, val titleKo: String? = null,
     )
 
     /**
@@ -287,17 +288,22 @@ class GoogleListings(private val context: Context, private val keys: Keys) : Lis
             // A clean still (no title on it) for the full-bleed backgrounds.
             backdrop = best(images.json.optJSONArray("backdrops").objects().filter { it.str("iso_639_1") == null }) ?: backdrop
         }
-        // The running time, when the search answer had none (the showtimes are spaced by it).
-        // and the synopsis, when the answer had none in that language.
-        val needKo = market == Market.KR && f.synopsisKo.isNullOrBlank()
-        val needEn = f.synopsis.isBlank()
-        val local = if (f.runtimeMinutes == null || needKo || (needEn && market == Market.US)) tmdb("/movie/$id", mapOf("language" to market.language)).json else null
-        val english = if (needEn && market != Market.US) tmdb("/movie/$id", mapOf("language" to "en-US")).json else if (market == Market.US) local else null
+        // The film page in the market language: the running time (the showtimes are spaced by it), the local title,
+        // and the distributor synopsis for when the search answer gave a thin one or none.
+        val local = tmdb("/movie/$id", mapOf("language" to market.language)).json
+        val thinKo = market == Market.KR && (f.synopsisKo?.length ?: 0) < 40
+        val thinEn = f.synopsis.length < 80
+        val english = when {
+            market == Market.US -> local
+            thinEn -> tmdb("/movie/$id", mapOf("language" to "en-US")).json
+            else -> null
+        }
         return Art(
             id, poster?.let { "https://image.tmdb.org/t/p/w780$it" }, backdrop?.let { "https://image.tmdb.org/t/p/w1280$it" },
-            runtime = local?.optInt("runtime")?.takeIf { it > 0 },
-            overviewEn = english?.str("overview")?.takeIf { needEn },
-            overviewKo = local?.str("overview")?.takeIf { needKo },
+            runtime = local.optInt("runtime").takeIf { it > 0 },
+            overviewEn = english?.str("overview")?.takeIf { thinEn && it.length > f.synopsis.length },
+            overviewKo = local.str("overview")?.takeIf { thinKo && it.length > (f.synopsisKo?.length ?: 0) && HANGUL.containsMatchIn(it) },
+            titleKo = local.str("title")?.takeIf { market == Market.KR && HANGUL.containsMatchIn(it) },
         )
     }
 
@@ -399,7 +405,20 @@ class GoogleListings(private val context: Context, private val keys: Keys) : Lis
                 (if (lang == "en") english else korean)[id] = p
             }
             // Open branches the public actually rates (closed and phantom listings drop out), nearest first.
-            english.values.sortedBy { it.metres() }.filter { it.open(50) }.take(market.theaterCount).mapNotNull { p ->
+            val nearest = english.values.sortedBy { it.metres() }.filter { it.open(50) }.take(market.theaterCount)
+            // A branch the Korean search left out still gets its Korean name: asked for by its place id.
+            coroutineScope {
+                nearest.map { it.optString("id") }.filter { it !in korean }.map { id ->
+                    async {
+                        val r = Http.call(
+                            "https://places.googleapis.com/v1/places/$id?languageCode=ko",
+                            androidHeaders + mapOf("X-Goog-Api-Key" to keys.google, "X-Goog-FieldMask" to "id,displayName,shortFormattedAddress,formattedAddress"),
+                        )
+                        if (r.ok) id to r.json else null
+                    }
+                }.awaitAll().filterNotNull().forEach { (id, place) -> korean[id] = place }
+            }
+            nearest.mapNotNull { p ->
                 val loc = p.obj("location") ?: return@mapNotNull null
                 val ko = korean[p.optString("id")]
                 val nameKo = ko?.name()?.takeIf { it.isNotEmpty() }
@@ -448,7 +467,7 @@ class GoogleListings(private val context: Context, private val keys: Keys) : Lis
             val parts = r.json.optJSONArray("places")?.optJSONObject(0)?.optJSONArray("addressComponents").objects()
             if (parts.isEmpty()) continue
             fun part(type: String) = parts.firstOrNull { type in it.optJSONArray("types").strings() }?.str("longText")
-            val wanted = if (market == Market.KR) listOf("sublocality_level_2", "sublocality_level_1", "locality") else listOf("neighborhood", "locality", "sublocality_level_1")
+            val wanted = if (market == Market.KR) listOf("sublocality_level_2", "sublocality_level_1", "locality") else listOf("locality", "neighborhood", "sublocality_level_1")
             val name = wanted.firstNotNullOfOrNull { part(it) } ?: continue
             // "성수동2가" and "Seongsu-dong 2(i)-ga" are both simply Seongsu-dong.
             val tidy = name.replace(Regex("\\s*\\d+가$"), "").replace(Regex("\\s+\\d+\\([a-z]+\\)-ga$", RegexOption.IGNORE_CASE), "")

@@ -91,7 +91,7 @@ class MoTixViewModel(application: Application) : AndroidViewModel(application) {
         private set
 
     /** The UI language (set by the UI from the system locale): the neighbourhood name is asked for in it. */
-    var korean: Boolean = false
+    var korean: Boolean = java.util.Locale.getDefault().language == "ko"
         set(value) {
             if (field != value) {
                 field = value

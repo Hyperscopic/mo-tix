@@ -155,7 +155,7 @@ fun SearchPage(vm: MoTixViewModel, url: String) {
                     layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
                     settings.javaScriptEnabled = true
                     settings.domStorageEnabled = true
-                    settings.saveFormData = false
+                    settings.saveFormData = false // a results page, not a browser: nothing typed here is kept
                     webViewClient = object : WebViewClient() {
                         // Google Search stays; every other site is left for the phone.
                         override fun shouldOverrideUrlLoading(v: WebView, request: WebResourceRequest): Boolean = !isGoogleSearch(request.url)
@@ -169,9 +169,16 @@ fun SearchPage(vm: MoTixViewModel, url: String) {
     }
 }
 
+/** Google's results page (and the redirect a Search suggestion goes through); never sign-in or any other Google page. */
 internal fun isGoogleSearch(uri: Uri): Boolean {
+    if (uri.scheme != "https") return false
     val host = uri.host.orEmpty().lowercase()
-    return uri.scheme == "https" && (host == "google.com" || host.endsWith(".google.com") || host == "vertexaisearch.cloud.google.com")
+    val path = uri.path.orEmpty()
+    return when (host) {
+        "vertexaisearch.cloud.google.com" -> true
+        "www.google.com", "google.com", "www.google.co.kr" -> path == "/search" || path.startsWith("/search/") || path == "/url"
+        else -> false
+    }
 }
 
 /** Where everything comes from. */
@@ -198,11 +205,8 @@ fun CreditsPanel(vm: MoTixViewModel) {
     }
 }
 
-/** TMDB's attribution mark: the name in TMDB's own colours (the gradient of the official logo). */
+/** The TMDB logo, as TMDB provides it for attribution. */
 @Composable
 private fun TmdbLogo() {
-    Text(
-        "TMDB", style = Type.TitleL.copy(brush = androidx.compose.ui.graphics.Brush.horizontalGradient(listOf(Color(0xFF90CEA1), Color(0xFF01B4E4)))),
-        fontWeight = FontWeight.ExtraBold, maxLines = 1, overflow = TextOverflow.Clip,
-    )
+    androidx.compose.foundation.Image(androidx.compose.ui.res.painterResource(R.drawable.ic_tmdb), "TMDB", Modifier.height(30.dp))
 }
