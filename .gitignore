@@ -1,0 +1,22 @@
+# Secrets and per-machine settings: never committed
+local.properties
+*.jks
+*.keystore
+keystore.properties
+
+# Build output
+.gradle/
+build/
+app/build/
+*.apk
+*.aab
+captures/
+
+# IDE
+.idea/
+*.iml
+.kotlin/
+.DS_Store
+
+# Screenshots show film posters and stills (third-party artwork): kept out of git until that is decided.
+docs/screenshots/

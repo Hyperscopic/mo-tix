@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name" translatable="false">Mo-Tix</string>
+    <string name="tagline">Be where the movies are.</string>
+
+    <!-- Lineup -->
+    <string name="now_showing">NOW SHOWING</string>
+    <string name="whats_on_tonight">What\'s on tonight</string>
+    <string name="whats_on_today">What\'s on today</string>
+    <string name="films_near">%1$d films near %2$s</string>
+    <string name="films_count">%1$d films in theaters now</string>
+    <string name="watch_trailer">Watch trailer</string>
+    <string name="see_it_nearby">See it nearby</string>
+    <string name="next_nearby">Next nearby: %1$s at %2$s, %3$s</string>
+    <string name="next_nearby_tomorrow">Next nearby: tomorrow %1$s at %2$s, %3$s</string>
+    <plurals name="theater_count">
+        <item quantity="one">%d theater</item>
+        <item quantity="other">%d theaters</item>
+    </plurals>
+    <string name="my_ticket">My ticket</string>
+    <string name="sources">Sources</string>
+    <string name="no_trailer">No trailer for this film yet</string>
+    <string name="no_artwork">No artwork yet</string>
+
+    <!-- Loading and errors -->
+    <string name="loading_films">Finding what\'s playing near you…</string>
+    <string name="loading_films_note">The first search takes a moment.</string>
+    <string name="loading_position">Finding the car\'s position…</string>
+    <string name="location_title">Mo-Tix starts from where the car is</string>
+    <string name="location_body">It uses the car\'s position to find the films and theaters nearby. Pleos will ask you to allow location access.</string>
+    <string name="location_denied">Location access is off for Mo-Tix. Allow it to see what\'s playing nearby.</string>
+    <string name="action_continue">Continue</string>
+    <string name="listings_unavailable">Listings aren\'t available right now</string>
+    <string name="listings_unavailable_note">Check the car\'s connection and try again.</string>
+    <string name="no_keys">This build has no API keys. See the README to add them.</string>
+    <string name="try_again">Try again</string>
+    <string name="theaters_unavailable">Theaters near you couldn\'t be loaded.</string>
+    <string name="no_theaters">No showings near you for this film today.</string>
+    <string name="loading_theaters">Finding theaters near you…</string>
+
+    <!-- Theaters and showtimes -->
+    <string name="all_films">All films</string>
+    <string name="back">Back</string>
+    <string name="theaters_near_place">Theaters near %1$s, nearest first. Pick a time to book.</string>
+    <string name="theaters_near_you">Theaters near you, nearest first. Pick a time to book.</string>
+    <string name="tomorrow">Tomorrow</string>
+    <string name="book_tickets">Book tickets</string>
+    <string name="get_route">Get route</string>
+    <string name="close">Close</string>
+    <string name="adult">Adult</string>
+    <string name="youth">Youth</string>
+    <string name="child">Child</string>
+
+    <!-- Booking -->
+    <string name="back_to_times">Back to times</string>
+    <string name="back_to_tickets">Back to tickets</string>
+    <string name="back_to_seats">Back to seats</string>
+    <string name="how_many">How many tickets?</string>
+    <string name="choose_seats">Choose seats</string>
+    <plurals name="pick_seats">
+        <item quantity="one">Pick %d seat</item>
+        <item quantity="other">Pick %d seats</item>
+    </plurals>
+    <string name="seats_hint">The screen is at the top. Taken seats are dark.</string>
+    <string name="screen_label">SCREEN</string>
+    <string name="picked_of">%1$d of %2$d picked</string>
+    <string name="review_pay">Review and pay</string>
+    <string name="label_when">When</string>
+    <string name="label_where">Where</string>
+    <string name="label_tickets">Tickets</string>
+    <string name="label_seats">Seats</string>
+    <string name="booking_fee">Booking fee</string>
+    <string name="total">Total</string>
+    <string name="none_yet">None yet</string>
+    <string name="not_picked">Not picked yet</string>
+    <string name="count_times">%1$s × %2$d</string>
+    <plurals name="adults_count">
+        <item quantity="one">%d adult</item>
+        <item quantity="other">%d adults</item>
+    </plurals>
+    <string name="youth_count">%1$d youth</string>
+    <plurals name="child_count">
+        <item quantity="one">%d child</item>
+        <item quantity="other">%d children</item>
+    </plurals>
+    <plurals name="ticket_count">
+        <item quantity="one">%d ticket</item>
+        <item quantity="other">%d tickets</item>
+    </plurals>
+    <string name="seat_row_one">Row %1$s, seat %2$s</string>
+    <string name="seat_row_many">Row %1$s, seats %2$s</string>
+    <string name="seat_cd">Seat %1$s</string>
+    <string name="seat_cd_taken">Seat %1$s, taken</string>
+    <string name="add_one">Add one %1$s</string>
+    <string name="remove_one">Remove one %1$s</string>
+    <string name="saved_card">Saved card  ····  4821</string>
+    <string name="pay_note">Pay in the car while parked. The receipt goes to your phone.</string>
+    <string name="pay_amount">Pay %1$s</string>
+    <string name="paying">Paying…</string>
+    <string name="booked_title">You\'re booked</string>
+    <string name="booked_collect">Show this code at %1$s to collect your tickets.</string>
+    <string name="booked_scan">This code is your ticket. Scan it at the door at %1$s.</string>
+    <string name="booking_ref">Booking %1$s</string>
+    <string name="done">Done</string>
+    <string name="collect_label">COLLECT AT THE CINEMA</string>
+    <string name="scan_label">SCAN AT THE DOOR</string>
+    <string name="pick_time_first">Pick a time first.</string>
+
+    <!-- Route (the car navigation) -->
+    <string name="route_requesting">Sending the route to navigation…</string>
+    <string name="route_guiding">Navigation is guiding you to %1$s</string>
+    <string name="route_unavailable">Navigation isn\'t available right now.</string>
+    <string name="route_too_close">You\'re already at %1$s.</string>
+    <string name="route_too_far">%1$s is too far for a route.</string>
+    <string name="route_low_battery">The battery is too low for this route.</string>
+    <string name="route_failed">The route couldn\'t be found. Try again.</string>
+    <string name="show_navigation">Show navigation</string>
+
+    <!-- While driving -->
+    <string name="driving_title">Available when parked</string>
+    <string name="driving_body">Trailers and booking pause while the car is moving.</string>
+
+    <!-- Sources -->
+    <string name="credit_films">Films in theaters now: Google Search, through Gemini with Grounding with Google Search.</string>
+    <string name="credit_theaters">Theaters: Google Maps (Places API).</string>
+    <string name="credit_art">Posters and stills: TMDB.</string>
+    <string name="credit_tmdb_notice" translatable="false">This product uses the TMDB API but is not endorsed or certified by TMDB.</string>
+    <string name="credit_trailers">Trailers: the official trailers, played in the YouTube player.</string>
+    <string name="credit_route">Routes and guidance: the car\'s own navigation.</string>
+    <string name="credit_font">Typeface: Asta Sans (SIL Open Font License 1.1).</string>
+    <string name="google_maps" translatable="false">Google Maps</string>
+
+    <!-- Units and time -->
+    <string name="runtime_h_min">%1$d h %2$d min</string>
+    <string name="runtime_min">%1$d min</string>
+    <string name="distance_km">%1$skm</string>
+    <string name="distance_m">%1$dm</string>
+    <string name="distance_mi">%1$s mi</string>
+</resources>

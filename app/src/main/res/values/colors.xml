@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="motix_background">#0B0B0D</color>
+    <color name="motix_tile_top">#FF6B3D</color>
+    <color name="motix_tile_bottom">#C21E56</color>
+</resources>

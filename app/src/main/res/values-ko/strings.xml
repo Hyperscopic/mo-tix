@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="tagline">영화가 있는 곳으로</string>
+
+    <!-- Lineup -->
+    <string name="now_showing">현재 상영 중</string>
+    <string name="whats_on_tonight">오늘 밤 상영작</string>
+    <string name="whats_on_today">오늘의 상영작</string>
+    <string name="films_near">%2$s 근처 상영작 %1$d편</string>
+    <string name="films_count">현재 상영작 %1$d편</string>
+    <string name="watch_trailer">예고편 보기</string>
+    <string name="see_it_nearby">근처에서 보기</string>
+    <string name="next_nearby">가장 빠른 상영: %2$s %1$s, %3$s</string>
+    <string name="next_nearby_tomorrow">가장 빠른 상영: 내일 %2$s %1$s, %3$s</string>
+    <plurals name="theater_count">
+        <item quantity="other">극장 %d곳</item>
+    </plurals>
+    <string name="my_ticket">내 티켓</string>
+    <string name="sources">정보 출처</string>
+    <string name="no_trailer">아직 예고편이 없습니다</string>
+    <string name="no_artwork">포스터 준비 중</string>
+
+    <!-- Loading and errors -->
+    <string name="loading_films">근처 상영작을 찾고 있습니다…</string>
+    <string name="loading_films_note">처음 검색은 잠시 시간이 걸립니다.</string>
+    <string name="loading_position">차량 위치를 확인하고 있습니다…</string>
+    <string name="location_title">Mo-Tix는 차량 위치에서 시작합니다</string>
+    <string name="location_body">차량 위치를 기준으로 가까운 극장과 상영작을 찾습니다. 이어지는 Pleos 안내에서 위치 접근을 허용해 주세요.</string>
+    <string name="location_denied">Mo-Tix의 위치 접근이 꺼져 있습니다. 근처 상영작을 보려면 위치 접근을 허용해 주세요.</string>
+    <string name="action_continue">계속</string>
+    <string name="listings_unavailable">지금은 상영 정보를 불러올 수 없습니다</string>
+    <string name="listings_unavailable_note">차량의 네트워크 연결을 확인한 뒤 다시 시도해 주세요.</string>
+    <string name="no_keys">이 빌드에는 API 키가 없습니다. README를 참고해 키를 추가해 주세요.</string>
+    <string name="try_again">다시 시도</string>
+    <string name="theaters_unavailable">근처 극장 정보를 불러오지 못했습니다.</string>
+    <string name="no_theaters">오늘 근처에서 이 영화의 상영 회차가 없습니다.</string>
+    <string name="loading_theaters">근처 극장을 찾고 있습니다…</string>
+
+    <!-- Theaters and showtimes -->
+    <string name="all_films">전체 상영작</string>
+    <string name="back">뒤로</string>
+    <string name="theaters_near_place">%1$s에서 가까운 극장 순서입니다. 시간을 선택해 예매하세요.</string>
+    <string name="theaters_near_you">가까운 극장 순서입니다. 시간을 선택해 예매하세요.</string>
+    <string name="tomorrow">내일</string>
+    <string name="book_tickets">예매하기</string>
+    <string name="get_route">경로 안내</string>
+    <string name="close">닫기</string>
+    <string name="adult">성인</string>
+    <string name="youth">청소년</string>
+    <string name="child">어린이</string>
+
+    <!-- Booking -->
+    <string name="back_to_times">상영 시간</string>
+    <string name="back_to_tickets">인원 선택</string>
+    <string name="back_to_seats">좌석 선택</string>
+    <string name="how_many">몇 명이 관람하시나요?</string>
+    <string name="choose_seats">좌석 선택</string>
+    <plurals name="pick_seats">
+        <item quantity="other">좌석 %d개를 선택하세요</item>
+    </plurals>
+    <string name="seats_hint">스크린은 위쪽입니다. 어두운 좌석은 이미 예매된 좌석입니다.</string>
+    <string name="screen_label">스크린</string>
+    <string name="picked_of">%2$d개 중 %1$d개 선택</string>
+    <string name="review_pay">확인 및 결제</string>
+    <string name="label_when">일시</string>
+    <string name="label_where">극장</string>
+    <string name="label_tickets">인원</string>
+    <string name="label_seats">좌석</string>
+    <string name="booking_fee">예매 수수료</string>
+    <string name="total">합계</string>
+    <string name="none_yet">선택 전</string>
+    <string name="not_picked">선택 전</string>
+    <string name="count_times">%1$s × %2$d</string>
+    <plurals name="adults_count">
+        <item quantity="other">성인 %d명</item>
+    </plurals>
+    <string name="youth_count">청소년 %1$d명</string>
+    <plurals name="child_count">
+        <item quantity="other">어린이 %d명</item>
+    </plurals>
+    <plurals name="ticket_count">
+        <item quantity="other">%d매</item>
+    </plurals>
+    <string name="seat_row_one">%1$s열 %2$s번</string>
+    <string name="seat_row_many">%1$s열 %2$s번</string>
+    <string name="seat_cd">좌석 %1$s</string>
+    <string name="seat_cd_taken">좌석 %1$s, 예매됨</string>
+    <string name="add_one">%1$s 1명 추가</string>
+    <string name="remove_one">%1$s 1명 빼기</string>
+    <string name="saved_card">등록된 카드  ····  4821</string>
+    <string name="pay_note">주차 중에 차 안에서 결제합니다. 영수증은 휴대폰으로 보내 드립니다.</string>
+    <string name="pay_amount">%1$s 결제</string>
+    <string name="paying">결제 중…</string>
+    <string name="booked_title">예매가 완료되었습니다</string>
+    <string name="booked_collect">%1$s에서 이 코드를 보여 주고 티켓을 받으세요.</string>
+    <string name="booked_scan">이 코드가 티켓입니다. %1$s 입구에서 스캔하세요.</string>
+    <string name="booking_ref">예매 번호 %1$s</string>
+    <string name="done">완료</string>
+    <string name="collect_label">극장에서 티켓 수령</string>
+    <string name="scan_label">입구에서 스캔</string>
+    <string name="pick_time_first">먼저 상영 시간을 선택해 주세요.</string>
+
+    <!-- Route (the car navigation) -->
+    <string name="route_requesting">내비게이션에 경로를 보내고 있습니다…</string>
+    <string name="route_guiding">내비게이션이 %1$s까지 안내하고 있습니다</string>
+    <string name="route_unavailable">지금은 내비게이션을 사용할 수 없습니다.</string>
+    <string name="route_too_close">이미 %1$s 근처에 있습니다.</string>
+    <string name="route_too_far">%1$s까지는 경로를 안내하기에 너무 멉니다.</string>
+    <string name="route_low_battery">배터리가 부족해 이 경로를 안내할 수 없습니다.</string>
+    <string name="route_failed">경로를 찾지 못했습니다. 다시 시도해 주세요.</string>
+    <string name="show_navigation">내비게이션 보기</string>
+
+    <!-- While driving -->
+    <string name="driving_title">주차 후 이용할 수 있습니다</string>
+    <string name="driving_body">주행 중에는 예고편 재생과 예매가 멈춥니다.</string>
+
+    <!-- Sources -->
+    <string name="credit_films">현재 상영작: Google 검색 (Gemini의 Google 검색 그라운딩)</string>
+    <string name="credit_theaters">극장: Google 지도 (Places API)</string>
+    <string name="credit_art">포스터와 스틸: TMDB</string>
+    <string name="credit_trailers">예고편: 공식 예고편을 YouTube 플레이어로 재생합니다.</string>
+    <string name="credit_route">경로와 길 안내: 차량 내비게이션</string>
+    <string name="credit_font">서체: Asta Sans (SIL Open Font License 1.1)</string>
+
+    <!-- Units and time -->
+    <string name="runtime_h_min">%1$d시간 %2$d분</string>
+    <string name="runtime_min">%1$d분</string>
+    <string name="distance_km">%1$skm</string>
+    <string name="distance_m">%1$dm</string>
+    <string name="distance_mi">%1$s mi</string>
+</resources>

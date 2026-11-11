@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Dark, edge to edge inside the Pleos app window. -->
+    <style name="Theme.MoTix" parent="android:Theme.Material.NoActionBar">
+        <item name="android:windowBackground">@color/motix_background</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:colorAccent">#596BFF</item>
+    </style>
+
+    <!-- Launch: the Android 12 splash screen, the Mo-Tix mark on the app background. Silent, under a second. -->
+    <style name="Theme.MoTix.Splash">
+        <item name="android:windowSplashScreenBackground">@color/motix_background</item>
+        <item name="android:windowSplashScreenAnimatedIcon">@drawable/ic_splash</item>
+        <item name="android:windowSplashScreenIconBackgroundColor">@color/motix_tile_bottom</item>
+        <item name="android:windowSplashScreenAnimationDuration">0</item>
+    </style>
+</resources>
