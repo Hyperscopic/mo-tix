@@ -124,11 +124,7 @@ Keys are optional: with none, the app runs in cached mode.
 | `GOOGLE_API_KEY` | Places API (New) | the Places API (New), and this Android app (package `com.hyperscopic.motix` + your signing certificate SHA-1) |
 | `TMDB_API_KEY` or `TMDB_READ_TOKEN` | posters, stills, trailers | (TMDB keys cannot be restricted) |
 
-**The keys are compiled into the APK and can be extracted from it.** That is acceptable for a demo build with
-restricted, quota-capped keys, and not for production. `ListingsRepository` is the seam: a hosted implementation keeps
-the keys on a server and the app ships without any.
-
-An APK you hand to someone else should be the `-PnoKeys` build: it has no keys in it and shows the saved listings.
+The keys are read at build time and compiled into the APK you build.
 
 ## Run it on the Pleos Connect emulator
 

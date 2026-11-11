@@ -1,11 +1,7 @@
 # Copy this file to local.properties and fill it in. local.properties is git-ignored: never commit keys.
 #
 # Every key here is optional. With none, Mo-Tix runs in cached mode on the Seoul listings saved with the app;
-# the keys are what the "Live" switch on the lineup needs.
-#
-# The keys are compiled into the APK (BuildConfig), so anyone holding the APK can extract them.
-# Restrict every key before you share a build (see "Keys" in README.md), and use a hosted
-# ListingsRepository for anything beyond a demo.
+# the keys are what the "Live" switch on the lineup needs. They are compiled into the APK you build.
 
 # Android SDK on this machine (Android Studio writes this line for you)
 sdk.dir=C\:\\Users\\you\\AppData\\Local\\Android\\Sdk

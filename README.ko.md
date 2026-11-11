@@ -125,11 +125,7 @@ cp local.properties.example local.properties   # sdk.dir과 키를 채웁니다
 | `GOOGLE_API_KEY` | Places API (New) | Places API (New)만 허용, Android 앱 제한(패키지 `com.hyperscopic.motix` + 서명 인증서 SHA-1) |
 | `TMDB_API_KEY` 또는 `TMDB_READ_TOKEN` | 포스터, 스틸, 예고편 | (TMDB 키는 제한할 수 없습니다) |
 
-**키는 APK 안에 포함되며 추출될 수 있습니다.** 사용 범위와 할당량을 제한한 키로 만든 시연용 빌드에는 괜찮지만 운영
-환경에는 적합하지 않습니다. `ListingsRepository`가 교체 지점입니다. 서버에서 키를 관리하는 구현으로 바꾸면 앱에는
-키가 들어가지 않습니다.
-
-다른 사람에게 전달하는 APK는 `-PnoKeys` 빌드를 사용하세요. 키가 들어 있지 않으며 저장된 상영 정보를 보여 줍니다.
+키는 빌드할 때 읽어 APK에 포함됩니다.
 
 ## Pleos Connect 에뮬레이터에서 실행
 

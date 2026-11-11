@@ -159,7 +159,7 @@ search varies from run to run, so look the list over before committing it.
 | Posters, stills, trailer thumbnails | `cache/img`, at most 7 days | TMDB and YouTube terms: no long-term copies |
 | The ticket | `files/ticket.json`, until the film has ended | so the ticket card survives a restart while driving |
 | The bundled snapshot | `assets/snapshot/seoul.json`, in the APK and the repository | a dated sample so the app runs with no keys (cached mode) |
-| API keys | compiled into the APK (`BuildConfig`), or none with `-PnoKeys` | see README: restrict them; production uses a hosted repository |
+| API keys | compiled into the APK (`BuildConfig`), or none with `-PnoKeys` | read from `local.properties` at build time |
 
 ## Ticketing (`data/Ticketing.kt`)
 
