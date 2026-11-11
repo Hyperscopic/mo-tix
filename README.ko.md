@@ -59,7 +59,7 @@ Kotlin과 Jetpack Compose로 만든 네이티브 앱입니다. 별도의 서버�
 |---|---|
 | 현재 상영작 | Google Gemini 2.5 Flash의 **Google 검색 그라운딩**(Google 요건에 따라 검색 제안을 목록과 함께 표시합니다) |
 | 극장 | **Google Places API (New)**: 한국에서는 CGV·메가박스·롯데시네마 텍스트 검색, 미국에서는 주변 검색 |
-| 포스터, 스틸, 상영 시간(러닝타임), 공식 예고편 ID | **TMDB API** |
+| 포스터, 스틸, 줄거리, 러닝타임, 공식 예고편 ID | **TMDB API** |
 | 예고편 | **YouTube 임베디드 플레이어**의 공식 예고편(YouTube oEmbed로 확인) |
 | 경로와 길 안내 | 차량 내비게이션(Pleos NaviHelper) |
 

@@ -102,10 +102,13 @@ search (the three Korean chains by name; a nearby search in the US), the TMDB la
    theaters this week as JSON (titles in both languages, genres, running time, synopsis, release date). Thinking is
    off: it is a lookup, and it answers in about 15 s. A "featured" film listed in `assets/trailers.json` is checked
    with a second call and listed when it is showing.
-2. **Artwork**: TMDB, matched by title, never by "first result". A result counts when (1) its Korean title is the
-   film's Korean title (or that title with a subtitle, the year agreeing), (2) its title or original title is the
-   English title, (3) its Korean title is nearly the same with the year agreeing, or (4) TMDB's English title is the
-   film's English title. Posters prefer the market language; stills are the ones with no text.
+2. **Artwork and film details**: TMDB, matched by title, never by "first result". A result counts when (1) its Korean
+   title is the film's Korean title (or that title with a subtitle, the year agreeing), (2) its title or original
+   title is the English title, (3) its Korean title is nearly the same with the year agreeing, or (4) TMDB's English
+   title is the film's English title. Posters prefer the market language; stills are the ones with no text. The
+   matched film's page also gives the running time and the distributor synopsis (used in place of the search
+   answer's one-line summary), and the Korean title when the search answer had none. A "Korean title" that has no
+   Hangul in it (the search sometimes returns a Japanese original title there) is not accepted as one.
 3. **Trailers**: the hand-checked id in `assets/trailers.json`, else the official trailer TMDB lists (market language
    first), else a YouTube Data API search when the key allows it. Every id is confirmed with YouTube oEmbed.
 4. **Theaters**: Places API (New). Korea: `searchText` for CGV, Megabox and Lotte Cinema in a box around the car, in

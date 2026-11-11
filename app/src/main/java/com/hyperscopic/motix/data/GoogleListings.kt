@@ -162,7 +162,9 @@ class GoogleListings(private val context: Context, private val keys: Keys) : Lis
     private fun JSONObject.toFilm(market: Market): Film? {
         val title = str("title") ?: return null
         val slug = title.lowercase(Locale.US).replace(Regex("[^a-z0-9]+"), "-").trim('-')
-        val titleKo = str("title_ko")?.takeIf { market != Market.US && norm(it) != norm(title) }
+        // A Korean title is written in Hangul: the search sometimes puts a film's Japanese original title here,
+        // which is no use to a Korean reader. Without one, TMDB's Korean title is used (see withArt).
+        val titleKo = str("title_ko")?.takeIf { market != Market.US && norm(it) != norm(title) && HANGUL.containsMatchIn(it) }
         // Age ratings only where they are checkable at a glance (US MPA); Korea's from one search answer were unreliable.
         val rating = (str("rating") ?: str("mpaa_rating"))?.takeIf {
             market == Market.US && it.lowercase(Locale.US) !in setOf("not rated", "nr", "none", "null", "n/a")
@@ -288,21 +290,16 @@ class GoogleListings(private val context: Context, private val keys: Keys) : Lis
             // A clean still (no title on it) for the full-bleed backgrounds.
             backdrop = best(images.json.optJSONArray("backdrops").objects().filter { it.str("iso_639_1") == null }) ?: backdrop
         }
-        // The film page in the market language: the running time (the showtimes are spaced by it), the local title,
-        // and the distributor synopsis for when the search answer gave a thin one or none.
+        // The film page in the market language: the running time (the showtimes are spaced by it), the local title
+        // and the distributor synopsis, which reads better than a search answer's one-line summary. English too,
+        // outside the US, for the English side of the UI.
         val local = tmdb("/movie/$id", mapOf("language" to market.language)).json
-        val thinKo = market == Market.KR && (f.synopsisKo?.length ?: 0) < 40
-        val thinEn = f.synopsis.length < 80
-        val english = when {
-            market == Market.US -> local
-            thinEn -> tmdb("/movie/$id", mapOf("language" to "en-US")).json
-            else -> null
-        }
+        val english = if (market == Market.US) local else tmdb("/movie/$id", mapOf("language" to "en-US")).json
         return Art(
             id, poster?.let { "https://image.tmdb.org/t/p/w780$it" }, backdrop?.let { "https://image.tmdb.org/t/p/w1280$it" },
             runtime = local.optInt("runtime").takeIf { it > 0 },
-            overviewEn = english?.str("overview")?.takeIf { thinEn && it.length > f.synopsis.length },
-            overviewKo = local.str("overview")?.takeIf { thinKo && it.length > (f.synopsisKo?.length ?: 0) && HANGUL.containsMatchIn(it) },
+            overviewEn = english.str("overview")?.takeIf { it.length >= 40 && !HANGUL.containsMatchIn(it) },
+            overviewKo = local.str("overview")?.takeIf { market == Market.KR && it.length >= 20 && HANGUL.containsMatchIn(it) },
             titleKo = local.str("title")?.takeIf { market == Market.KR && HANGUL.containsMatchIn(it) },
         )
     }

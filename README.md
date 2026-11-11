@@ -60,7 +60,7 @@ How the pieces fit, the loading and caching rules, and the driving logic: [docs/
 |---|---|
 | Films in theaters now | Google Gemini 2.5 Flash with **Grounding with Google Search** (the Google Search suggestions are shown with the list, as Google requires) |
 | Theaters | **Google Places API (New)**: a text search for CGV, Megabox and Lotte Cinema in Korea, a nearby search in the US |
-| Posters, stills, running times, official trailer ids | **TMDB API** |
+| Posters, stills, synopses, running times, official trailer ids | **TMDB API** |
 | Trailers | The official trailer in the **YouTube embedded player**, confirmed with YouTube oEmbed |
 | Routes and guidance | The car's navigation (Pleos NaviHelper) |
 

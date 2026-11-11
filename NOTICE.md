@@ -5,8 +5,8 @@ of them.
 
 ## TMDB
 
-Posters, stills, running times, synopses where the search answer had none, and the ids of official trailers come from
-the TMDB API.
+Posters, stills, synopses, running times, Korean titles where the search answer had none, and the ids of official
+trailers come from the TMDB API.
 
 > This product uses the TMDB API but is not endorsed or certified by TMDB.
 

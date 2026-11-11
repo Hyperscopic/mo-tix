@@ -33,7 +33,20 @@ Showtimes, seats and payment are simulated (see the README). Film artwork belong
 | ![](screenshots/en/12_route_native_navigation.jpg) 11. The Pleos navigation | ![](screenshots/en/13_half_window_ticket_beside_navigation.jpg) 12. The ticket card beside the map |
 | ![](screenshots/en/14_driving_static_ticket_card.jpg) 13. Driving: the static ticket card | |
 
-### The US market
+## The signed release build, on a factory-reset emulator
+
+Version 1.0.1, release APK, on the emulator straight after a factory reset (Korean, the light display mode it ships
+with). The first launch, then the same flow.
+
+| | |
+|---|---|
+| ![](screenshots/release/02_first_run_location.jpg) 1. First launch: why Mo-Tix wants the car's position | ![](screenshots/release/03_system_permission_prompt.jpg) 2. Pleos asks for location access |
+| ![](screenshots/release/04_system_permission_prompt_fused.jpg) 3. Pleos asks for the fused position (its own permission) | ![](screenshots/release/06_lineup.jpg) 4. The first load, done |
+| ![](screenshots/release/08_trailer_parked.jpg) 5. Trailer, parked | ![](screenshots/release/10_theaters.jpg) 6. Theaters |
+| ![](screenshots/release/15_booked_qr.jpg) 7. Booked | ![](screenshots/release/16_route_native_navigation.jpg) 8. The Pleos navigation, guiding |
+| ![](screenshots/release/18_driving_static_ticket_card.jpg) 9. Driving (D, 40 km/h): the static ticket card | ![](screenshots/release/19_route_ended.jpg) 10. Route ended in the navigation: Mo-Tix offers it again |
+
+## The US market
 
 The same build with the car placed in Culver City, California (`adb emu geo fix -118.3945 34.0230`).
 
