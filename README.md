@@ -33,7 +33,7 @@ Kotlin과 Jetpack Compose로 만든 네이티브 앱입니다. 별도의 서버�
 |---|---|
 | 앱 이름 | Mo-Tix |
 | 한 줄 소개 | 차량의 위치와 대화면으로 가까운 극장의 상영작을 찾고, 예고편 감상부터 예매, 극장까지의 길 안내를 차 안에서 한 번에 끝내는 앱 |
-| APK 위치 | [`apk/Hyperscopic_MoTix_release.apk`](apk/Hyperscopic_MoTix_release.apk) (v1.1.1, release 서명, API 키 미포함) |
+| APK 위치 | [`apk/AriJacobs_MoTix_release.apk`](apk/AriJacobs_MoTix_release.apk) (v1.1.1, release 서명, API 키 미포함) |
 | 실행 방법 | 아래 [실행 방법](#실행-방법) 참고: APK 설치 후 Pleos 앱 목록에서 Mo-Tix 실행 |
 | 개발·테스트 환경 | **Pleos Connect Emulator v2.1.0** (AVD 'Pleos Connect v2.1.0', 시스템 이미지 `android-34` / `pleos_car_emulator` / `x86_64`, Android 14) |
 | 화면 규격 | **2560 × 1440 px, 160 dpi** (Connect-S). 앱 창: 전체 2:0 = 약 1682 × 1210 dp, 분할 1:1 = 약 841 × 1210 dp. 두 크기 모두 지원 |
@@ -57,7 +57,7 @@ Kotlin과 Jetpack Compose로 만든 네이티브 앱입니다. 별도의 서버�
    **반드시 콜드 부팅**하세요. 퀵 부트 스냅샷으로 시작하면 차량 HAL이 동작하지 않습니다.
 2. APK를 설치합니다.
    ```bash
-   adb -s <serial> install -r apk/Hyperscopic_MoTix_release.apk
+   adb -s <serial> install -r apk/AriJacobs_MoTix_release.apk
    ```
 3. Pleos 앱 목록에서 **Mo-Tix**를 엽니다. 저장된 서울(성수동) 상영작 화면으로 바로 시작합니다.
 4. **주행 상태**는 에뮬레이터가 제공하는 *Pleos Connect Virtual Console*(기어, 속도)로 바꿉니다. 터미널에서는 다음과
@@ -173,7 +173,7 @@ cp local.properties.example local.properties   # sdk.dir을 채웁니다(키는 
 ### 프로젝트 구조
 
 ```
-apk/          Hyperscopic_MoTix_release.apk (release, API 키 미포함)
+apk/          AriJacobs_MoTix_release.apk (release, API 키 미포함)
 app/src/main/java/com/hyperscopic/motix/
   MainActivity.kt, MoTixApp.kt, MoTixViewModel.kt   상태, 화면 스택, 로딩 규칙
   platform/   CarNavigator (NaviHelper) · CarLocation (FusedLocation) · DrivingMonitor (CarUxRestrictions, 기어)
@@ -217,7 +217,7 @@ data providers directly, and to the car through the Pleos Connect SDK and the st
 |---|---|
 | App name | Mo-Tix |
 | One-line description | Finds the films playing at theaters near the car, and takes you from the trailer through booking to navigation to the theater, all on the car's big screen |
-| APK | [`apk/Hyperscopic_MoTix_release.apk`](apk/Hyperscopic_MoTix_release.apk) (v1.1.1, release-signed, no API keys inside) |
+| APK | [`apk/AriJacobs_MoTix_release.apk`](apk/AriJacobs_MoTix_release.apk) (v1.1.1, release-signed, no API keys inside) |
 | How to run | See [How to run](#how-to-run): install the APK, open Mo-Tix from the Pleos app library |
 | Development and test environment | **Pleos Connect Emulator v2.1.0** (AVD "Pleos Connect v2.1.0", system image `android-34` / `pleos_car_emulator` / `x86_64`, Android 14) |
 | Screen | **2560 × 1440 px at 160 dpi** (Connect-S). App window: full 2:0 = about 1682 × 1210 dp, half 1:1 = about 841 × 1210 dp. Both are supported |
@@ -241,7 +241,7 @@ data providers directly, and to the car through the Pleos Connect SDK and the st
    **Cold boot it**: a quick-boot snapshot disables the vehicle HAL.
 2. Install the APK:
    ```bash
-   adb -s <serial> install -r apk/Hyperscopic_MoTix_release.apk
+   adb -s <serial> install -r apk/AriJacobs_MoTix_release.apk
    ```
 3. Open **Mo-Tix** from the Pleos app library. It opens on the saved Seoul (Seongsu-dong) lineup.
 4. **Driving states**: use the *Pleos Connect Virtual Console* that the emulator serves (gear, speed). From a terminal:
@@ -355,7 +355,7 @@ The keys are read at build time and compiled into the APK you build.
 ### Project layout
 
 ```
-apk/          Hyperscopic_MoTix_release.apk (release, no API keys inside)
+apk/          AriJacobs_MoTix_release.apk (release, no API keys inside)
 app/src/main/java/com/hyperscopic/motix/
   MainActivity.kt, MoTixApp.kt, MoTixViewModel.kt   state, screen stack, the loading rule
   platform/   CarNavigator (NaviHelper) · CarLocation (FusedLocation) · DrivingMonitor (CarUxRestrictions, gear)
