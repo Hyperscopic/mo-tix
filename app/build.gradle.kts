@@ -26,8 +26,8 @@ android {
         applicationId = "com.hyperscopic.motix"
         minSdk = 34 // Pleos Connect is Android Automotive OS 14
         targetSdk = 34
-        versionCode = 4
-        versionName = "1.1.0"
+        versionCode = 5
+        versionName = "1.1.1"
         resourceConfigurations += listOf("en", "ko")
 
         // Films: Gemini with Grounding with Google Search (Vertex AI when a project is set, else the Gemini API).

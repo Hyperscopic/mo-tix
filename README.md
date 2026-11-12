@@ -33,7 +33,7 @@ Kotlin과 Jetpack Compose로 만든 네이티브 앱입니다. 별도의 서버�
 |---|---|
 | 앱 이름 | Mo-Tix |
 | 한 줄 소개 | 차량의 위치와 대화면으로 가까운 극장의 상영작을 찾고, 예고편 감상부터 예매, 극장까지의 길 안내를 차 안에서 한 번에 끝내는 앱 |
-| APK 위치 | [`apk/Hyperscopic_MoTix_release.apk`](apk/Hyperscopic_MoTix_release.apk) (v1.1.0, release 서명, API 키 미포함) |
+| APK 위치 | [`apk/Hyperscopic_MoTix_release.apk`](apk/Hyperscopic_MoTix_release.apk) (v1.1.1, release 서명, API 키 미포함) |
 | 실행 방법 | 아래 [실행 방법](#실행-방법) 참고: APK 설치 후 Pleos 앱 목록에서 Mo-Tix 실행 |
 | 개발·테스트 환경 | **Pleos Connect Emulator v2.1.0** (AVD 'Pleos Connect v2.1.0', 시스템 이미지 `android-34` / `pleos_car_emulator` / `x86_64`, Android 14) |
 | 화면 규격 | **2560 × 1440 px, 160 dpi** (Connect-S). 앱 창: 전체 2:0 = 약 1682 × 1210 dp, 분할 1:1 = 약 841 × 1210 dp. 두 크기 모두 지원 |
@@ -217,7 +217,7 @@ data providers directly, and to the car through the Pleos Connect SDK and the st
 |---|---|
 | App name | Mo-Tix |
 | One-line description | Finds the films playing at theaters near the car, and takes you from the trailer through booking to navigation to the theater, all on the car's big screen |
-| APK | [`apk/Hyperscopic_MoTix_release.apk`](apk/Hyperscopic_MoTix_release.apk) (v1.1.0, release-signed, no API keys inside) |
+| APK | [`apk/Hyperscopic_MoTix_release.apk`](apk/Hyperscopic_MoTix_release.apk) (v1.1.1, release-signed, no API keys inside) |
 | How to run | See [How to run](#how-to-run): install the APK, open Mo-Tix from the Pleos app library |
 | Development and test environment | **Pleos Connect Emulator v2.1.0** (AVD "Pleos Connect v2.1.0", system image `android-34` / `pleos_car_emulator` / `x86_64`, Android 14) |
 | Screen | **2560 × 1440 px at 160 dpi** (Connect-S). App window: full 2:0 = about 1682 × 1210 dp, half 1:1 = about 841 × 1210 dp. Both are supported |

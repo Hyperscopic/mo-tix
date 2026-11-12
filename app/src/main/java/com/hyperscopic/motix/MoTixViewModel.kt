@@ -50,8 +50,9 @@ data class TheaterShowings(val theater: Theater, val metres: Double?, val showin
  * The app's state: the listings for where the car is, the screen stack, and the booking.
  *
  * Loading follows one rule: show the last good data at once, fetch behind it, and show a spinner only on a first load
- * ever. The film list of the last launch comes off the head unit before the car has reported a position; the theaters
- * (never stored: Google Places terms) arrive about a second after it does.
+ * ever. In live mode the film list of the last launch comes off the head unit before the car has reported a position;
+ * the theaters are asked for about a second after it does and are kept in memory only. In cached mode both come from
+ * the bundled, dated snapshot.
  */
 class MoTixViewModel(application: Application) : AndroidViewModel(application) {
     private val app = application as MoTixApp

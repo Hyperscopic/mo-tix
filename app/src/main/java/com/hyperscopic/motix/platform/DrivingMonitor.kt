@@ -19,19 +19,22 @@ import kotlinx.coroutines.flow.StateFlow
  *  - [CarUxRestrictionsManager] is the authority. The platform works out the restrictions from the gear, the speed
  *    and the region, and the app applies what it is told (Pleos driving-restriction development guide).
  *  - The gear ([VehiclePropertyIds.GEAR_SELECTION]) only ever makes Mo-Tix stricter: video and payment need Park.
+ *
+ * It fails closed. Until the car has answered, and whenever the car service is gone, the state is the default one:
+ * restricted, no video, not parked.
  */
 data class DrivingState(
     /** The platform asks for a distraction-optimized screen (the car is idling or moving). */
-    val restricted: Boolean = false,
+    val restricted: Boolean = true,
     /** `UX_RESTRICTIONS_NO_VIDEO` is active. */
-    val noVideo: Boolean = false,
+    val noVideo: Boolean = true,
     /** The gear, when the car reports it: true in Park. Null when unknown. */
     val inPark: Boolean? = null,
-    /** False when the Car API is missing (not a car): nothing is restricted. */
+    /** False until the Car UX service connects; unavailable vehicle state remains restricted. */
     val carConnected: Boolean = false,
 ) {
-    /** Parked: no restriction is active and the gear, when known, is Park. */
-    val parked: Boolean get() = !restricted && inPark != false
+    /** Parked: the Car UX service is connected, no restriction is active, and known gear is Park. */
+    val parked: Boolean get() = carConnected && !restricted && inPark != false
 
     /** Trailers play only while parked and never under NO_VIDEO. */
     val videoAllowed: Boolean get() = parked && !noVideo
@@ -54,6 +57,7 @@ class DrivingMonitor(private val context: Context) {
         override fun onChangeEvent(value: CarPropertyValue<*>) {
             val gear = value.value as? Int ?: return
             _state.value = _state.value.copy(inPark = gear == VehicleGear.GEAR_PARK)
+            Log.i(TAG, "Gear: park=${gear == VehicleGear.GEAR_PARK}")
         }
 
         override fun onErrorEvent(propId: Int, zone: Int) = Unit
@@ -75,6 +79,7 @@ class DrivingMonitor(private val context: Context) {
             ux = manager
             manager.registerListener(uxListener)
             _state.value = _state.value.copy(carConnected = true)
+            Log.i(TAG, "Car service connected")
             manager.currentCarUxRestrictions?.let { apply(it) }
         }.onFailure { Log.w(TAG, "CarUxRestrictionsManager unavailable", it) }
         runCatching {
@@ -83,6 +88,7 @@ class DrivingMonitor(private val context: Context) {
             manager.registerCallback(gearListener, VehiclePropertyIds.GEAR_SELECTION, CarPropertyManager.SENSOR_RATE_ONCHANGE)
             (manager.getProperty<Int>(VehiclePropertyIds.GEAR_SELECTION, 0)?.value)?.let {
                 _state.value = _state.value.copy(inPark = it == VehicleGear.GEAR_PARK)
+                Log.i(TAG, "Gear: park=${it == VehicleGear.GEAR_PARK}")
             }
         }.onFailure { Log.i(TAG, "Gear not readable; CarUxRestrictions alone decides: ${it.message}") }
     }
@@ -91,6 +97,7 @@ class DrivingMonitor(private val context: Context) {
         ux = null
         props = null
         _state.value = DrivingState()
+        Log.w(TAG, "Car service lost: restricted until it is back")
     }
 
     private fun apply(r: CarUxRestrictions) {
@@ -98,7 +105,7 @@ class DrivingMonitor(private val context: Context) {
         _state.value = _state.value.copy(
             carConnected = true,
             restricted = r.isRequiresDistractionOptimization,
-            noVideo = r.isRequiresDistractionOptimization && (active and CarUxRestrictions.UX_RESTRICTIONS_NO_VIDEO) != 0,
+            noVideo = (active and CarUxRestrictions.UX_RESTRICTIONS_NO_VIDEO) != 0,
         )
         Log.i(TAG, "UX restrictions: requiresDO=${r.isRequiresDistractionOptimization} active=0x${active.toString(16)}")
     }
@@ -110,6 +117,7 @@ class DrivingMonitor(private val context: Context) {
         car = null
         ux = null
         props = null
+        _state.value = DrivingState() // nobody is listening any more: what was last heard must not stand
     }
 
     private companion object {

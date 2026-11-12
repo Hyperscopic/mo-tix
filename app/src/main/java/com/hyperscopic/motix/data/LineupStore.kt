@@ -7,15 +7,6 @@ import java.io.File
 import java.time.ZonedDateTime
 
 /**
- * What Mo-Tix keeps on the head unit, so a launch shows something at once and fetches behind it.
- *
- * Kept, per market: the last good film list with its Google Search credit (at most [MAX_AGE_MS], the limit Google sets
- * for stored grounded results), and the current ticket.
- *
- * Not kept: anything from Google Places. Theater names and addresses are asked for again on every launch (it takes
- * about a second); the Places terms do not allow storing them.
- */
-/**
  * A dated sample of the listings for one place (Seongsu-dong, Seoul), bundled with the app. It is what Mo-Tix shows in
  * cached mode: films, artwork addresses, trailer ids and theaters as they were on [capturedAtMillis]. The showtimes on
  * top of it are still made for today.
@@ -31,6 +22,16 @@ data class Snapshot(
     val theaters: List<Theater>,
 )
 
+/**
+ * What Mo-Tix keeps on the head unit, so a launch shows something at once and fetches behind it.
+ *
+ * Kept, per market: the last good film list with its Google Search credit (at most [MAX_AGE_MS], the limit Google sets
+ * for stored grounded results), and the current ticket.
+ *
+ * Not kept: the theaters of live mode. Their names and addresses come from Google Places, stay in memory and are asked
+ * for again on every launch (it takes about a second). The theaters of cached mode are the ones in the bundled
+ * [Snapshot].
+ */
 class LineupStore(context: Context) {
     private val dir: File = context.filesDir
     private val assets = context.assets

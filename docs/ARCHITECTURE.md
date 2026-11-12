@@ -30,7 +30,11 @@ Pleos policy is "standard first", so this uses only the AAOS Car API.
   app applies what it is told. On the Pleos Connect emulator, Park gives `requiresDistractionOptimization = false`;
   idling and moving give `true` with `UX_RESTRICTIONS_NO_VIDEO | UX_RESTRICTIONS_NO_SETUP` (0x50).
 - `CarPropertyManager` → `GEAR_SELECTION` (permission `android.car.permission.CAR_POWERTRAIN`) can only make Mo-Tix
-  stricter: `parked` is "no restriction active **and** the gear, when known, is Park".
+  stricter: `parked` is "the car service is connected, no restriction is active **and** the gear, when known, is Park".
+- It fails closed. Until the car service has answered, and whenever it is gone, `DrivingState` is the default one
+  (restricted, no video), so Mo-Tix behaves as if the car were moving: no trailer, no payment, the ticket card or the
+  notice only.
+- `UX_RESTRICTIONS_NO_VIDEO` stops trailers on its own, whatever the distraction-optimization flag says.
 
 What follows from `DrivingState`:
 
@@ -155,10 +159,10 @@ search varies from run to run, so look the list over before committing it.
 | Data | Kept | Why |
 |---|---|---|
 | Film list and its Google Search credit | `files/films_<market>.json`, at most 30 days | Google's limit for stored grounded results |
-| Theater names, addresses | never (memory only) | Places API terms |
+| Theater names, addresses (live mode) | memory only, asked for again on every launch | Google Places results are not kept on the head unit |
 | Posters, stills, trailer thumbnails | `cache/img`, at most 7 days | TMDB and YouTube terms: no long-term copies |
 | The ticket | `files/ticket.json`, until the film has ended | so the ticket card survives a restart while driving |
-| The bundled snapshot | `assets/snapshot/seoul.json`, in the APK and the repository | a dated sample so the app runs with no keys (cached mode) |
+| The bundled snapshot (films, artwork addresses, trailer ids, theaters) | `assets/snapshot/seoul.json`, in the APK and the repository | a dated sample so the app runs with no keys (cached mode) |
 | API keys | compiled into the APK (`BuildConfig`), or none with `-PnoKeys` | read from `local.properties` at build time |
 
 ## Ticketing (`data/Ticketing.kt`)
